@@ -3,6 +3,7 @@ package com.florescer.ui.screens
 import androidx.compose.foundation.Image
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -30,10 +31,18 @@ fun MoodScreen(navController: NavHostController) {
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
     )
-    var selectedMood by remember { mutableStateOf<String?>(null) }
-    var comment by remember { mutableStateOf(TextFieldValue("")) }
+    // Lista dos emojis
+    val moodsImages = listOf(
+        R.drawable.emoji_feliz,
+        R.drawable.emoji_neutro,
+        R.drawable.emoji_triste,
+        R.drawable.emoji_bravo,
+        R.drawable.emoji_vomito,
+        R.drawable.emoji_amor
+    )
 
-    val moods = listOf("😄", "😢", "😡", "😰", "😐", "🥰")
+    var selectedMood by remember { mutableStateOf<Int?>(null) }
+    var comment by remember { mutableStateOf(TextFieldValue("")) }
 
     // Lista de sintomas físicos
     val symptoms = listOf("Cansaço", "Fadiga", "Dor de cabeça", "Dores musculares", "Insônia")
@@ -70,25 +79,31 @@ fun MoodScreen(navController: NavHostController) {
             )
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(7.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                moods.forEach { mood ->
-                    Text(
-                        text = mood,
-                        fontSize = 32.sp,
+                moodsImages.forEach { imageRes ->
+                    val isSelected = selectedMood == imageRes
+
+                    Image(
+                        painter = painterResource(id = imageRes),
+                        contentDescription = "Mood",
                         modifier = Modifier
+                            .size(56.dp)
                             .clip(CircleShape)
-                            .background(
-                                if (selectedMood == mood) Color(0xFFFFC1E3) else Color.Transparent
+                            .border(
+                                width = if (isSelected) 2.dp else 0.dp,
+                                color = if (isSelected) Color(0xFFFFC1E3) else Color.Transparent,
+                                shape = CircleShape
                             )
-                            .padding(8.dp)
-                            .clickable { selectedMood = mood }
+                            .padding(4.dp)
+                            .clickable { selectedMood = imageRes },
+                        contentScale = ContentScale.Crop
                     )
                 }
             }
 
-            // Seção sintomas físicos com checkboxes
+            // Seção sintomas físicos
             Text(
                 text = "Sintomas físicos:",
                 fontSize = 20.sp,
@@ -99,38 +114,61 @@ fun MoodScreen(navController: NavHostController) {
 
             Column(
                 modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(2.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 symptoms.forEach { symptom ->
+                    val isChecked = selectedSymptoms.contains(symptom)
+
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                if (selectedSymptoms.contains(symptom)) {
-                                    selectedSymptoms.remove(symptom)
-                                } else {
-                                    selectedSymptoms.add(symptom)
-                                }
+                                if (isChecked) selectedSymptoms.remove(symptom)
+                                else selectedSymptoms.add(symptom)
                             }
-                            .padding(3.dp)
+                            .padding(4.dp)
                     ) {
-                        Checkbox(
-                            checked = selectedSymptoms.contains(symptom),
-                            onCheckedChange = {
-                                if (it) selectedSymptoms.add(symptom)
-                                else selectedSymptoms.remove(symptom)
-                            },
-                            colors = CheckboxDefaults.colors(checkedColor = RosaBotao)
+                        Box(
+                            modifier = Modifier
+                                .size(24.dp)
+                                .border(
+                                    width = 2.dp,
+                                    color = RosaBotao,
+                                    shape = RoundedCornerShape(4.dp)
+                                )
+                        ) {
+                            Checkbox(
+                                checked = isChecked,
+                                onCheckedChange = {
+                                    if (it) selectedSymptoms.add(symptom)
+                                    else selectedSymptoms.remove(symptom)
+                                },
+                                colors = CheckboxDefaults.colors(
+                                    checkedColor = Color.Transparent,
+                                    uncheckedColor = Color.Transparent,
+                                    checkmarkColor = RosaBotao
+                                ),
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .padding(0.dp)
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.width(8.dp))
+
+                        Text(
+                            text = symptom,
+                            fontSize = 16.sp,
+                            color = RosaTexto
                         )
-                        Text(text = symptom, fontSize = 16.sp, color = RosaTexto)
                     }
                 }
             }
-            // Botão Registrar Humor (registrar tudo)
+
+            // Botão Registrar Humor
             Button(
                 onClick = {
-                    // Exemplo: enviar dados para API
                     println("Humor: $selectedMood")
                     println("Comentário: ${comment.text}")
                     println("Sintomas: $selectedSymptoms")

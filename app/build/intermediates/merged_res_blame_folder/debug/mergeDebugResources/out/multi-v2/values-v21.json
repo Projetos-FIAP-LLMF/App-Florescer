@@ -4,7 +4,7 @@
             "outputFile": "com.florescer.app-mergeDebugResources-50:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Usuario\\.gradle\\caches\\8.12\\transforms\\46a66995b33e6f515b166e672c843bea\\transformed\\core-1.16.0\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\Lauren Vasconcelos\\.gradle\\caches\\8.12\\transforms\\46a66995b33e6f515b166e672c843bea\\transformed\\core-1.16.0\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

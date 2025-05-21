@@ -1,55 +1,55 @@
-com.florescer.app-jetified-ui-unit-release-0 C:\Users\Usuario\.gradle\caches\8.12\transforms\020f7dbe3613d4070a5ba850cc6754a6\transformed\jetified-ui-unit-release\res
-com.florescer.app-jetified-emoji2-1.4.0-1 C:\Users\Usuario\.gradle\caches\8.12\transforms\1f0e7df0075a9f363fc0fa0c65b653da\transformed\jetified-emoji2-1.4.0\res
-com.florescer.app-jetified-ui-graphics-release-2 C:\Users\Usuario\.gradle\caches\8.12\transforms\1fe89feab2cd58d4127db74f20dfb8b9\transformed\jetified-ui-graphics-release\res
-com.florescer.app-jetified-ui-tooling-release-3 C:\Users\Usuario\.gradle\caches\8.12\transforms\221175b1b8d9a499426c4a0604a4fec1\transformed\jetified-ui-tooling-release\res
-com.florescer.app-jetified-ui-tooling-data-release-4 C:\Users\Usuario\.gradle\caches\8.12\transforms\229ba3bdccbeb9492c9bbb4ea0a372c6\transformed\jetified-ui-tooling-data-release\res
-com.florescer.app-jetified-lifecycle-runtime-release-5 C:\Users\Usuario\.gradle\caches\8.12\transforms\231703f6bf000d77a6b10e043c296cf1\transformed\jetified-lifecycle-runtime-release\res
-com.florescer.app-jetified-core-viewtree-1.0.0-6 C:\Users\Usuario\.gradle\caches\8.12\transforms\39c6b58153762d74af59d5eca705fb74\transformed\jetified-core-viewtree-1.0.0\res
-com.florescer.app-jetified-lifecycle-viewmodel-compose-release-7 C:\Users\Usuario\.gradle\caches\8.12\transforms\46a3fd9785f6ed06db7949d277f5c0ea\transformed\jetified-lifecycle-viewmodel-compose-release\res
-com.florescer.app-core-1.16.0-8 C:\Users\Usuario\.gradle\caches\8.12\transforms\46a66995b33e6f515b166e672c843bea\transformed\core-1.16.0\res
-com.florescer.app-jetified-ui-tooling-preview-release-9 C:\Users\Usuario\.gradle\caches\8.12\transforms\470be1109f66f15fa2852b82b5613f66\transformed\jetified-ui-tooling-preview-release\res
-com.florescer.app-jetified-runtime-release-10 C:\Users\Usuario\.gradle\caches\8.12\transforms\4ea09c881470b4de8e20bc427a18d71b\transformed\jetified-runtime-release\res
-com.florescer.app-jetified-annotation-experimental-1.4.1-11 C:\Users\Usuario\.gradle\caches\8.12\transforms\5a00afec8411e8b2f88a5b5d89db89d0\transformed\jetified-annotation-experimental-1.4.1\res
-com.florescer.app-jetified-savedstate-ktx-1.3.0-12 C:\Users\Usuario\.gradle\caches\8.12\transforms\5fcd11f74c0a7b9ee9ca3effd8117b61\transformed\jetified-savedstate-ktx-1.3.0\res
-com.florescer.app-jetified-lifecycle-viewmodel-savedstate-release-13 C:\Users\Usuario\.gradle\caches\8.12\transforms\616b94519c3b07cbb05258b2d2a77b44\transformed\jetified-lifecycle-viewmodel-savedstate-release\res
-com.florescer.app-navigation-common-2.7.7-14 C:\Users\Usuario\.gradle\caches\8.12\transforms\6581a2c4cc3cb58fd0350bd392c1a39f\transformed\navigation-common-2.7.7\res
-com.florescer.app-jetified-customview-poolingcontainer-1.0.0-15 C:\Users\Usuario\.gradle\caches\8.12\transforms\6e56ecfcbb3ef3466d97c0942277cc18\transformed\jetified-customview-poolingcontainer-1.0.0\res
-com.florescer.app-jetified-activity-1.10.1-16 C:\Users\Usuario\.gradle\caches\8.12\transforms\74ad9918ca075ac6128f163ab91e0a89\transformed\jetified-activity-1.10.1\res
-com.florescer.app-jetified-material-ripple-release-17 C:\Users\Usuario\.gradle\caches\8.12\transforms\760fbc9b0b0640c9145b9ecee33e3dc4\transformed\jetified-material-ripple-release\res
-com.florescer.app-lifecycle-livedata-core-2.9.0-18 C:\Users\Usuario\.gradle\caches\8.12\transforms\77caccc3bf82a70e3f47ca6ee2872e0a\transformed\lifecycle-livedata-core-2.9.0\res
-com.florescer.app-jetified-lifecycle-process-2.9.0-19 C:\Users\Usuario\.gradle\caches\8.12\transforms\7994204acbe352ba5c49700e9aa5f424\transformed\jetified-lifecycle-process-2.9.0\res
-com.florescer.app-jetified-foundation-release-20 C:\Users\Usuario\.gradle\caches\8.12\transforms\7cfca36f8b1139c88be8031a11c0edd5\transformed\jetified-foundation-release\res
-com.florescer.app-jetified-ui-text-release-21 C:\Users\Usuario\.gradle\caches\8.12\transforms\81ebc09997ac81414d7d1e2a4fad543a\transformed\jetified-ui-text-release\res
-com.florescer.app-jetified-profileinstaller-1.4.0-22 C:\Users\Usuario\.gradle\caches\8.12\transforms\82169c24b298845b02ef38c1fcdc2c20\transformed\jetified-profileinstaller-1.4.0\res
-com.florescer.app-jetified-animation-release-23 C:\Users\Usuario\.gradle\caches\8.12\transforms\856bf21db04a298a6eea01d6a113f44e\transformed\jetified-animation-release\res
-com.florescer.app-jetified-material3-1.1.2-24 C:\Users\Usuario\.gradle\caches\8.12\transforms\878237bbd73d8953c376f474ff0053d7\transformed\jetified-material3-1.1.2\res
-com.florescer.app-jetified-material-release-25 C:\Users\Usuario\.gradle\caches\8.12\transforms\88f9df3f9ddd955fa5724cd6bc4d0294\transformed\jetified-material-release\res
-com.florescer.app-jetified-activity-ktx-1.10.1-26 C:\Users\Usuario\.gradle\caches\8.12\transforms\9473ac36b87733f76a61d07b08fe8246\transformed\jetified-activity-ktx-1.10.1\res
-com.florescer.app-core-runtime-2.2.0-27 C:\Users\Usuario\.gradle\caches\8.12\transforms\97541253741edb1f4e524ef0b56739e5\transformed\core-runtime-2.2.0\res
-com.florescer.app-jetified-navigation-compose-2.7.7-28 C:\Users\Usuario\.gradle\caches\8.12\transforms\9ccc79fa56328bebb4f45d3bd8a8d725\transformed\jetified-navigation-compose-2.7.7\res
-com.florescer.app-jetified-runtime-saveable-release-29 C:\Users\Usuario\.gradle\caches\8.12\transforms\9d31903affb1f21a710dd05d1379a634\transformed\jetified-runtime-saveable-release\res
-com.florescer.app-jetified-ui-geometry-release-30 C:\Users\Usuario\.gradle\caches\8.12\transforms\9e613b8fecd58f14e498671806dd50d4\transformed\jetified-ui-geometry-release\res
-com.florescer.app-jetified-lifecycle-runtime-compose-release-31 C:\Users\Usuario\.gradle\caches\8.12\transforms\a729821e932f01055a566a2ba0df5bb5\transformed\jetified-lifecycle-runtime-compose-release\res
-com.florescer.app-navigation-runtime-ktx-2.7.7-32 C:\Users\Usuario\.gradle\caches\8.12\transforms\aa02fac045cf414be14d3c5d8fd00d25\transformed\navigation-runtime-ktx-2.7.7\res
-com.florescer.app-jetified-material-icons-core-1.4.1-33 C:\Users\Usuario\.gradle\caches\8.12\transforms\b06cd879d4bbda26297c72d01ab865dc\transformed\jetified-material-icons-core-1.4.1\res
-com.florescer.app-jetified-ui-util-release-34 C:\Users\Usuario\.gradle\caches\8.12\transforms\bc2a295d4913c8b22670e844417d93e7\transformed\jetified-ui-util-release\res
-com.florescer.app-jetified-core-ktx-1.16.0-35 C:\Users\Usuario\.gradle\caches\8.12\transforms\c257f01ec0fc1e5be8cff1e75d658caa\transformed\jetified-core-ktx-1.16.0\res
-com.florescer.app-jetified-startup-runtime-1.1.1-36 C:\Users\Usuario\.gradle\caches\8.12\transforms\c94fa8d40f5bdcbb51fd0631b1049780\transformed\jetified-startup-runtime-1.1.1\res
-com.florescer.app-navigation-common-ktx-2.7.7-37 C:\Users\Usuario\.gradle\caches\8.12\transforms\ce8ce4069e82d31d0b3e8899405fee18\transformed\navigation-common-ktx-2.7.7\res
-com.florescer.app-jetified-foundation-layout-release-38 C:\Users\Usuario\.gradle\caches\8.12\transforms\d0c3f03a044ac16e33966076163ac816\transformed\jetified-foundation-layout-release\res
-com.florescer.app-navigation-runtime-2.7.7-39 C:\Users\Usuario\.gradle\caches\8.12\transforms\dce8edbb77f62b73a77e3a5d4b412763\transformed\navigation-runtime-2.7.7\res
-com.florescer.app-jetified-graphics-path-1.0.1-40 C:\Users\Usuario\.gradle\caches\8.12\transforms\e2de0811401c691f45abbe00f807b7d2\transformed\jetified-graphics-path-1.0.1\res
-com.florescer.app-jetified-ui-release-41 C:\Users\Usuario\.gradle\caches\8.12\transforms\e3b16902daf92b9c97712524ab3d5aa6\transformed\jetified-ui-release\res
-com.florescer.app-jetified-animation-core-release-42 C:\Users\Usuario\.gradle\caches\8.12\transforms\e5cd5159b5e82279be70ea27484cf2ea\transformed\jetified-animation-core-release\res
-com.florescer.app-jetified-lifecycle-viewmodel-release-43 C:\Users\Usuario\.gradle\caches\8.12\transforms\eeae47c645e4d6f475988d5d0ee088ac\transformed\jetified-lifecycle-viewmodel-release\res
-com.florescer.app-jetified-tracing-1.2.0-44 C:\Users\Usuario\.gradle\caches\8.12\transforms\f05cd1a21a5c33900829189fa9565bb1\transformed\jetified-tracing-1.2.0\res
-com.florescer.app-jetified-lifecycle-viewmodel-ktx-2.9.0-45 C:\Users\Usuario\.gradle\caches\8.12\transforms\f63afcb564a32aa247714e0887e3df1f\transformed\jetified-lifecycle-viewmodel-ktx-2.9.0\res
-com.florescer.app-jetified-activity-compose-1.10.1-46 C:\Users\Usuario\.gradle\caches\8.12\transforms\f842f0c6eabdb737e2b19d969ceca86f\transformed\jetified-activity-compose-1.10.1\res
-com.florescer.app-jetified-savedstate-release-47 C:\Users\Usuario\.gradle\caches\8.12\transforms\ffdefa1a119d51d32bfb07df00d054f8\transformed\jetified-savedstate-release\res
-com.florescer.app-pngs-48 C:\Users\Usuario\Desktop\FlorescerCompleteApp\app\build\generated\res\pngs\debug
-com.florescer.app-resValues-49 C:\Users\Usuario\Desktop\FlorescerCompleteApp\app\build\generated\res\resValues\debug
-com.florescer.app-packageDebugResources-50 C:\Users\Usuario\Desktop\FlorescerCompleteApp\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.florescer.app-packageDebugResources-51 C:\Users\Usuario\Desktop\FlorescerCompleteApp\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.florescer.app-debug-52 C:\Users\Usuario\Desktop\FlorescerCompleteApp\app\build\intermediates\merged_res\debug\mergeDebugResources
-com.florescer.app-debug-53 C:\Users\Usuario\Desktop\FlorescerCompleteApp\app\src\debug\res
-com.florescer.app-main-54 C:\Users\Usuario\Desktop\FlorescerCompleteApp\app\src\main\res
+com.florescer.app-jetified-ui-unit-release-0 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\020f7dbe3613d4070a5ba850cc6754a6\transformed\jetified-ui-unit-release\res
+com.florescer.app-jetified-emoji2-1.4.0-1 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\1f0e7df0075a9f363fc0fa0c65b653da\transformed\jetified-emoji2-1.4.0\res
+com.florescer.app-jetified-ui-graphics-release-2 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\1fe89feab2cd58d4127db74f20dfb8b9\transformed\jetified-ui-graphics-release\res
+com.florescer.app-jetified-ui-tooling-release-3 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\221175b1b8d9a499426c4a0604a4fec1\transformed\jetified-ui-tooling-release\res
+com.florescer.app-jetified-ui-tooling-data-release-4 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\229ba3bdccbeb9492c9bbb4ea0a372c6\transformed\jetified-ui-tooling-data-release\res
+com.florescer.app-jetified-lifecycle-runtime-release-5 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\231703f6bf000d77a6b10e043c296cf1\transformed\jetified-lifecycle-runtime-release\res
+com.florescer.app-jetified-core-viewtree-1.0.0-6 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\39c6b58153762d74af59d5eca705fb74\transformed\jetified-core-viewtree-1.0.0\res
+com.florescer.app-jetified-lifecycle-viewmodel-compose-release-7 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\46a3fd9785f6ed06db7949d277f5c0ea\transformed\jetified-lifecycle-viewmodel-compose-release\res
+com.florescer.app-core-1.16.0-8 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\46a66995b33e6f515b166e672c843bea\transformed\core-1.16.0\res
+com.florescer.app-jetified-ui-tooling-preview-release-9 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\470be1109f66f15fa2852b82b5613f66\transformed\jetified-ui-tooling-preview-release\res
+com.florescer.app-jetified-runtime-release-10 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\4ea09c881470b4de8e20bc427a18d71b\transformed\jetified-runtime-release\res
+com.florescer.app-jetified-annotation-experimental-1.4.1-11 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\5a00afec8411e8b2f88a5b5d89db89d0\transformed\jetified-annotation-experimental-1.4.1\res
+com.florescer.app-jetified-savedstate-ktx-1.3.0-12 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\5fcd11f74c0a7b9ee9ca3effd8117b61\transformed\jetified-savedstate-ktx-1.3.0\res
+com.florescer.app-jetified-lifecycle-viewmodel-savedstate-release-13 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\616b94519c3b07cbb05258b2d2a77b44\transformed\jetified-lifecycle-viewmodel-savedstate-release\res
+com.florescer.app-navigation-common-2.7.7-14 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\6581a2c4cc3cb58fd0350bd392c1a39f\transformed\navigation-common-2.7.7\res
+com.florescer.app-jetified-customview-poolingcontainer-1.0.0-15 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\6e56ecfcbb3ef3466d97c0942277cc18\transformed\jetified-customview-poolingcontainer-1.0.0\res
+com.florescer.app-jetified-activity-1.10.1-16 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\74ad9918ca075ac6128f163ab91e0a89\transformed\jetified-activity-1.10.1\res
+com.florescer.app-jetified-material-ripple-release-17 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\760fbc9b0b0640c9145b9ecee33e3dc4\transformed\jetified-material-ripple-release\res
+com.florescer.app-lifecycle-livedata-core-2.9.0-18 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\77caccc3bf82a70e3f47ca6ee2872e0a\transformed\lifecycle-livedata-core-2.9.0\res
+com.florescer.app-jetified-lifecycle-process-2.9.0-19 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\7994204acbe352ba5c49700e9aa5f424\transformed\jetified-lifecycle-process-2.9.0\res
+com.florescer.app-jetified-foundation-release-20 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\7cfca36f8b1139c88be8031a11c0edd5\transformed\jetified-foundation-release\res
+com.florescer.app-jetified-ui-text-release-21 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\81ebc09997ac81414d7d1e2a4fad543a\transformed\jetified-ui-text-release\res
+com.florescer.app-jetified-profileinstaller-1.4.0-22 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\82169c24b298845b02ef38c1fcdc2c20\transformed\jetified-profileinstaller-1.4.0\res
+com.florescer.app-jetified-animation-release-23 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\856bf21db04a298a6eea01d6a113f44e\transformed\jetified-animation-release\res
+com.florescer.app-jetified-material3-1.1.2-24 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\878237bbd73d8953c376f474ff0053d7\transformed\jetified-material3-1.1.2\res
+com.florescer.app-jetified-material-release-25 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\88f9df3f9ddd955fa5724cd6bc4d0294\transformed\jetified-material-release\res
+com.florescer.app-jetified-activity-ktx-1.10.1-26 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\9473ac36b87733f76a61d07b08fe8246\transformed\jetified-activity-ktx-1.10.1\res
+com.florescer.app-core-runtime-2.2.0-27 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\97541253741edb1f4e524ef0b56739e5\transformed\core-runtime-2.2.0\res
+com.florescer.app-jetified-navigation-compose-2.7.7-28 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\9ccc79fa56328bebb4f45d3bd8a8d725\transformed\jetified-navigation-compose-2.7.7\res
+com.florescer.app-jetified-runtime-saveable-release-29 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\9d31903affb1f21a710dd05d1379a634\transformed\jetified-runtime-saveable-release\res
+com.florescer.app-jetified-ui-geometry-release-30 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\9e613b8fecd58f14e498671806dd50d4\transformed\jetified-ui-geometry-release\res
+com.florescer.app-jetified-lifecycle-runtime-compose-release-31 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\a729821e932f01055a566a2ba0df5bb5\transformed\jetified-lifecycle-runtime-compose-release\res
+com.florescer.app-navigation-runtime-ktx-2.7.7-32 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\aa02fac045cf414be14d3c5d8fd00d25\transformed\navigation-runtime-ktx-2.7.7\res
+com.florescer.app-jetified-material-icons-core-1.4.1-33 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\b06cd879d4bbda26297c72d01ab865dc\transformed\jetified-material-icons-core-1.4.1\res
+com.florescer.app-jetified-ui-util-release-34 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\bc2a295d4913c8b22670e844417d93e7\transformed\jetified-ui-util-release\res
+com.florescer.app-jetified-core-ktx-1.16.0-35 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\c257f01ec0fc1e5be8cff1e75d658caa\transformed\jetified-core-ktx-1.16.0\res
+com.florescer.app-jetified-startup-runtime-1.1.1-36 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\c94fa8d40f5bdcbb51fd0631b1049780\transformed\jetified-startup-runtime-1.1.1\res
+com.florescer.app-navigation-common-ktx-2.7.7-37 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\ce8ce4069e82d31d0b3e8899405fee18\transformed\navigation-common-ktx-2.7.7\res
+com.florescer.app-jetified-foundation-layout-release-38 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\d0c3f03a044ac16e33966076163ac816\transformed\jetified-foundation-layout-release\res
+com.florescer.app-navigation-runtime-2.7.7-39 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\dce8edbb77f62b73a77e3a5d4b412763\transformed\navigation-runtime-2.7.7\res
+com.florescer.app-jetified-graphics-path-1.0.1-40 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\e2de0811401c691f45abbe00f807b7d2\transformed\jetified-graphics-path-1.0.1\res
+com.florescer.app-jetified-ui-release-41 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\e3b16902daf92b9c97712524ab3d5aa6\transformed\jetified-ui-release\res
+com.florescer.app-jetified-animation-core-release-42 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\e5cd5159b5e82279be70ea27484cf2ea\transformed\jetified-animation-core-release\res
+com.florescer.app-jetified-lifecycle-viewmodel-release-43 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\eeae47c645e4d6f475988d5d0ee088ac\transformed\jetified-lifecycle-viewmodel-release\res
+com.florescer.app-jetified-tracing-1.2.0-44 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\f05cd1a21a5c33900829189fa9565bb1\transformed\jetified-tracing-1.2.0\res
+com.florescer.app-jetified-lifecycle-viewmodel-ktx-2.9.0-45 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\f63afcb564a32aa247714e0887e3df1f\transformed\jetified-lifecycle-viewmodel-ktx-2.9.0\res
+com.florescer.app-jetified-activity-compose-1.10.1-46 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\f842f0c6eabdb737e2b19d969ceca86f\transformed\jetified-activity-compose-1.10.1\res
+com.florescer.app-jetified-savedstate-release-47 C:\Users\Lauren Vasconcelos\.gradle\caches\8.12\transforms\ffdefa1a119d51d32bfb07df00d054f8\transformed\jetified-savedstate-release\res
+com.florescer.app-pngs-48 C:\Users\Lauren Vasconcelos\workspace\App-Florescer\app\build\generated\res\pngs\debug
+com.florescer.app-resValues-49 C:\Users\Lauren Vasconcelos\workspace\App-Florescer\app\build\generated\res\resValues\debug
+com.florescer.app-packageDebugResources-50 C:\Users\Lauren Vasconcelos\workspace\App-Florescer\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.florescer.app-packageDebugResources-51 C:\Users\Lauren Vasconcelos\workspace\App-Florescer\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.florescer.app-debug-52 C:\Users\Lauren Vasconcelos\workspace\App-Florescer\app\build\intermediates\merged_res\debug\mergeDebugResources
+com.florescer.app-debug-53 C:\Users\Lauren Vasconcelos\workspace\App-Florescer\app\src\debug\res
+com.florescer.app-main-54 C:\Users\Lauren Vasconcelos\workspace\App-Florescer\app\src\main\res

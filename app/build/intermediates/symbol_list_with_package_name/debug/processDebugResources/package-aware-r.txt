@@ -69,6 +69,12 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+drawable emoji_amor
+drawable emoji_bravo
+drawable emoji_feliz
+drawable emoji_neutro
+drawable emoji_triste
+drawable emoji_vomito
 drawable ic_call_answer
 drawable ic_call_answer_low
 drawable ic_call_answer_video
