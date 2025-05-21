@@ -1,4 +1,4 @@
-# Aplicativo Florescer - Challenge
+# Aplicativo Florescer - Challenge FIAP
 
 ## **O que é o Florescer?**
 
@@ -10,16 +10,16 @@ Não é apenas um app de bem-estar.
 
 É um espaço de pausa no caos. Um lembrete de que seu corpo é corpo, não máquina. Um convite pra desacelerar, se ouvir, se acolher. Aqui, cada pessoa é respeitada no seu tempo — e cuidada com afeto. O que você já fez por você hoje?
 
-## **✨Nosso propósito**
+## ✨ **Nosso propósito**
 
 - Acolher com afeto
 - Conectar com cuidado
 
-## 🫶 **Público-alvo**
+## 🎯 **Público-alvo**
 
 Jovens • Mulheres • LGBTQIA+ • Profissionais de tecnologia • Estudantes
 
-## **💡 Solução**
+## 💡 **Solução**
 
 Uma plataforma de saúde mental que oferece:
 
@@ -57,7 +57,7 @@ Uma plataforma de saúde mental que oferece:
     - Lembretes em horários definidos
     - Dica diária automática
 
-## **Colaboradoras:**
+## 👩🏻‍💻 **Colaboradoras:**
 
 - Francine Maciel de Sá - RM555542
 - Luciana Fernandes de Oliveira - RM557258
