@@ -59,7 +59,7 @@ Uma plataforma de saúde mental que oferece:
 
 ## **Colaboradoras:**
 
-- **  Francine Maciel de Sá - RM555542
-- **  Luciana Fernandes de Oliveira - RM557258
-- **  Lauren Vasconcelos - RM556759
-- **  Myrella Uchoa Santos - RM557077
+- **Francine Maciel de Sá - RM555542
+- **Luciana Fernandes de Oliveira - RM557258
+- **Lauren Vasconcelos - RM556759
+- **Myrella Uchoa Santos - RM557077
