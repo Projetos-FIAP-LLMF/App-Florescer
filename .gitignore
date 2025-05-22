@@ -1,0 +1,96 @@
+# ------------------------
+# Gradle e arquivos de build
+# ------------------------
+.gradle/
+**/.gradle/
+build/
+**/build/
+*/build/
+buildSrc/
+out/
+.kotlinc/
+kotlin/
+
+# Wrapper
+!gradle-wrapper.jar
+
+# ------------------------
+# Android Studio / IntelliJ
+# ------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# ------------------------
+# Arquivos locais e de sistema
+# ------------------------
+local.properties
+.DS_Store
+Thumbs.db
+
+# ------------------------
+# Arquivos compilados / binários
+# ------------------------
+*.class
+*.jar
+*.war
+*.ear
+*.bin
+*.lock
+*.keystream
+*.keystream.len
+*.len
+*.tab
+*.tab_i
+*.tab.values.at
+
+# ------------------------
+# Arquivos temporários e logs
+# ------------------------
+*.tmp
+*.temp
+*.log
+*.hprof
+
+# ------------------------
+# Arquivos gerados / metadados
+# ------------------------
+*.kotlin_module
+*.json
+*.metadata
+
+# ------------------------
+# APKs, keystores e builds
+# ------------------------
+*.apk
+*.ap_
+*.jks
+*.keystore
+.externalNativeBuild/
+.cxx/
+
+# ------------------------
+# Google / Firebase
+# ------------------------
+google-services.json
+fabric.properties
+/crashlytics-build.properties
+
+# ------------------------
+# Fastlane
+# ------------------------
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+
+# ------------------------
+# Outros
+# ------------------------
+captures/
+outputs/
