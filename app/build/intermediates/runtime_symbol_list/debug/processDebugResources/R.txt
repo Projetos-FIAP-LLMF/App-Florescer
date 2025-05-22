@@ -68,6 +68,12 @@ int dimen notification_small_icon_size_as_large 0x7f030012
 int dimen notification_subtext_size 0x7f030013
 int dimen notification_top_pad 0x7f030014
 int dimen notification_top_pad_large_text 0x7f030015
+int drawable emoji_amor 0x7f040018
+int drawable emoji_bravo 0x7f040019
+int drawable emoji_feliz 0x7f04001a
+int drawable emoji_neutro 0x7f04001b
+int drawable emoji_triste 0x7f04001c
+int drawable emoji_vomito 0x7f04001d
 int drawable ic_call_answer 0x7f040000
 int drawable ic_call_answer_low 0x7f040001
 int drawable ic_call_answer_video 0x7f040002

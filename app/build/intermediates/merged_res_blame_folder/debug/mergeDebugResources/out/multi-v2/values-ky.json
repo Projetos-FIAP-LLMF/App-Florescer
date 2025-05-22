@@ -4,41 +4,7 @@
             "outputFile": "com.florescer.app-mergeDebugResources-50:/values-ky/values-ky.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Usuario\\.gradle\\caches\\8.12\\transforms\\46a66995b33e6f515b166e672c843bea\\transformed\\core-1.16.0\\res\\values-ky\\values-ky.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,155,257,360,467,569,673,784",
-                        "endColumns": "99,101,102,106,101,103,110,100",
-                        "endOffsets": "150,252,355,462,564,668,779,880"
-                    },
-                    "to": {
-                        "startLines": "7,8,9,10,11,12,13,67",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "679,779,881,984,1091,1193,1297,6847",
-                        "endColumns": "99,101,102,106,101,103,110,100",
-                        "endOffsets": "774,876,979,1086,1188,1292,1403,6943"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Usuario\\.gradle\\caches\\8.12\\transforms\\7cfca36f8b1139c88be8031a11c0edd5\\transformed\\jetified-foundation-release\\res\\values-ky\\values-ky.xml",
-                    "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,143,242",
-                        "endColumns": "87,98,103",
-                        "endOffsets": "138,237,341"
-                    },
-                    "to": {
-                        "startLines": "2,84,85",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "105,8472,8571",
-                        "endColumns": "87,98,103",
-                        "endOffsets": "188,8566,8670"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Usuario\\.gradle\\caches\\8.12\\transforms\\878237bbd73d8953c376f474ff0053d7\\transformed\\jetified-material3-1.1.2\\res\\values-ky\\values-ky.xml",
+                    "source": "C:\\Users\\Lauren Vasconcelos\\.gradle\\caches\\8.12\\transforms\\878237bbd73d8953c376f474ff0053d7\\transformed\\jetified-material3-1.1.2\\res\\values-ky\\values-ky.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,24 +21,41 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Usuario\\.gradle\\caches\\8.12\\transforms\\88f9df3f9ddd955fa5724cd6bc4d0294\\transformed\\jetified-material-release\\res\\values-ky\\values-ky.xml",
+                    "source": "C:\\Users\\Lauren Vasconcelos\\.gradle\\caches\\8.12\\transforms\\46a66995b33e6f515b166e672c843bea\\transformed\\core-1.16.0\\res\\values-ky\\values-ky.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "90",
-                        "endOffsets": "141"
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,155,257,360,467,569,673,784",
+                        "endColumns": "99,101,102,106,101,103,110,100",
+                        "endOffsets": "150,252,355,462,564,668,779,880"
                     },
                     "to": {
-                        "startLines": "55",
-                        "startColumns": "4",
-                        "startOffsets": "5867",
-                        "endColumns": "90",
-                        "endOffsets": "5953"
+                        "startLines": "7,8,9,10,11,12,13,67",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "679,779,881,984,1091,1193,1297,6847",
+                        "endColumns": "99,101,102,106,101,103,110,100",
+                        "endOffsets": "774,876,979,1086,1188,1292,1403,6943"
                     }
                 },
                 {
-                    "source": "C:\\Users\\Usuario\\.gradle\\caches\\8.12\\transforms\\e3b16902daf92b9c97712524ab3d5aa6\\transformed\\jetified-ui-release\\res\\values-ky\\values-ky.xml",
+                    "source": "C:\\Users\\Lauren Vasconcelos\\.gradle\\caches\\8.12\\transforms\\7cfca36f8b1139c88be8031a11c0edd5\\transformed\\jetified-foundation-release\\res\\values-ky\\values-ky.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,143,242",
+                        "endColumns": "87,98,103",
+                        "endOffsets": "138,237,341"
+                    },
+                    "to": {
+                        "startLines": "2,84,85",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "105,8472,8571",
+                        "endColumns": "87,98,103",
+                        "endOffsets": "188,8566,8670"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Lauren Vasconcelos\\.gradle\\caches\\8.12\\transforms\\e3b16902daf92b9c97712524ab3d5aa6\\transformed\\jetified-ui-release\\res\\values-ky\\values-ky.xml",
                     "from": {
                         "startLines": "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -86,6 +69,23 @@
                         "startOffsets": "1408,1501,5234,5344,5516,5687,5769,5958,6047,6132,6217,6386,6540,6627,6701,6774,7056,7135,7203",
                         "endColumns": "92,83,109,99,84,81,97,88,84,84,86,72,86,73,72,72,78,67,117",
                         "endOffsets": "1496,1580,5339,5439,5596,5764,5862,6042,6127,6212,6299,6454,6622,6696,6769,6842,7130,7198,7316"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Lauren Vasconcelos\\.gradle\\caches\\8.12\\transforms\\88f9df3f9ddd955fa5724cd6bc4d0294\\transformed\\jetified-material-release\\res\\values-ky\\values-ky.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "90",
+                        "endOffsets": "141"
+                    },
+                    "to": {
+                        "startLines": "55",
+                        "startColumns": "4",
+                        "startOffsets": "5867",
+                        "endColumns": "90",
+                        "endOffsets": "5953"
                     }
                 }
             ]

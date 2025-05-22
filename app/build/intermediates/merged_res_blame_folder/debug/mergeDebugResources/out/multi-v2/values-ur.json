@@ -4,58 +4,7 @@
             "outputFile": "com.florescer.app-mergeDebugResources-50:/values-ur/values-ur.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Usuario\\.gradle\\caches\\8.12\\transforms\\7cfca36f8b1139c88be8031a11c0edd5\\transformed\\jetified-foundation-release\\res\\values-ur\\values-ur.xml",
-                    "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,128,213",
-                        "endColumns": "72,84,86",
-                        "endOffsets": "123,208,295"
-                    },
-                    "to": {
-                        "startLines": "2,84,85",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "105,8436,8521",
-                        "endColumns": "72,84,86",
-                        "endOffsets": "173,8516,8603"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Usuario\\.gradle\\caches\\8.12\\transforms\\46a66995b33e6f515b166e672c843bea\\transformed\\core-1.16.0\\res\\values-ur\\values-ur.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,153,255,357,461,564,662,776",
-                        "endColumns": "97,101,101,103,102,97,113,100",
-                        "endOffsets": "148,250,352,456,559,657,771,872"
-                    },
-                    "to": {
-                        "startLines": "7,8,9,10,11,12,13,67",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "636,734,836,938,1042,1145,1243,6807",
-                        "endColumns": "97,101,101,103,102,97,113,100",
-                        "endOffsets": "729,831,933,1037,1140,1238,1352,6903"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Usuario\\.gradle\\caches\\8.12\\transforms\\e3b16902daf92b9c97712524ab3d5aa6\\transformed\\jetified-ui-release\\res\\values-ur\\values-ur.xml",
-                    "from": {
-                        "startLines": "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "179,273,356,446,543,631,712,805,893,979,1062,1147,1222,1305,1383,1457,1530,1605,1671",
-                        "endColumns": "93,82,89,96,87,80,92,87,85,82,84,74,82,77,73,72,74,65,116",
-                        "endOffsets": "268,351,441,538,626,707,800,888,974,1057,1142,1217,1300,1378,1452,1525,1600,1666,1783"
-                    },
-                    "to": {
-                        "startLines": "14,15,48,49,51,53,54,56,57,58,59,61,63,64,65,66,69,70,71",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "1357,1451,5222,5312,5481,5648,5729,5909,5997,6083,6166,6337,6499,6582,6660,6734,7019,7094,7160",
-                        "endColumns": "93,82,89,96,87,80,92,87,85,82,84,74,82,77,73,72,74,65,116",
-                        "endOffsets": "1446,1529,5307,5404,5564,5724,5817,5992,6078,6161,6246,6407,6577,6655,6729,6802,7089,7155,7272"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Usuario\\.gradle\\caches\\8.12\\transforms\\878237bbd73d8953c376f474ff0053d7\\transformed\\jetified-material3-1.1.2\\res\\values-ur\\values-ur.xml",
+                    "source": "C:\\Users\\Lauren Vasconcelos\\.gradle\\caches\\8.12\\transforms\\878237bbd73d8953c376f474ff0053d7\\transformed\\jetified-material3-1.1.2\\res\\values-ur\\values-ur.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -72,7 +21,41 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Usuario\\.gradle\\caches\\8.12\\transforms\\88f9df3f9ddd955fa5724cd6bc4d0294\\transformed\\jetified-material-release\\res\\values-ur\\values-ur.xml",
+                    "source": "C:\\Users\\Lauren Vasconcelos\\.gradle\\caches\\8.12\\transforms\\e3b16902daf92b9c97712524ab3d5aa6\\transformed\\jetified-ui-release\\res\\values-ur\\values-ur.xml",
+                    "from": {
+                        "startLines": "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "179,273,356,446,543,631,712,805,893,979,1062,1147,1222,1305,1383,1457,1530,1605,1671",
+                        "endColumns": "93,82,89,96,87,80,92,87,85,82,84,74,82,77,73,72,74,65,116",
+                        "endOffsets": "268,351,441,538,626,707,800,888,974,1057,1142,1217,1300,1378,1452,1525,1600,1666,1783"
+                    },
+                    "to": {
+                        "startLines": "14,15,48,49,51,53,54,56,57,58,59,61,63,64,65,66,69,70,71",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "1357,1451,5222,5312,5481,5648,5729,5909,5997,6083,6166,6337,6499,6582,6660,6734,7019,7094,7160",
+                        "endColumns": "93,82,89,96,87,80,92,87,85,82,84,74,82,77,73,72,74,65,116",
+                        "endOffsets": "1446,1529,5307,5404,5564,5724,5817,5992,6078,6161,6246,6407,6577,6655,6729,6802,7089,7155,7272"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Lauren Vasconcelos\\.gradle\\caches\\8.12\\transforms\\7cfca36f8b1139c88be8031a11c0edd5\\transformed\\jetified-foundation-release\\res\\values-ur\\values-ur.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,128,213",
+                        "endColumns": "72,84,86",
+                        "endOffsets": "123,208,295"
+                    },
+                    "to": {
+                        "startLines": "2,84,85",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "105,8436,8521",
+                        "endColumns": "72,84,86",
+                        "endOffsets": "173,8516,8603"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Lauren Vasconcelos\\.gradle\\caches\\8.12\\transforms\\88f9df3f9ddd955fa5724cd6bc4d0294\\transformed\\jetified-material-release\\res\\values-ur\\values-ur.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -86,6 +69,23 @@
                         "startOffsets": "5822",
                         "endColumns": "86",
                         "endOffsets": "5904"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Lauren Vasconcelos\\.gradle\\caches\\8.12\\transforms\\46a66995b33e6f515b166e672c843bea\\transformed\\core-1.16.0\\res\\values-ur\\values-ur.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,153,255,357,461,564,662,776",
+                        "endColumns": "97,101,101,103,102,97,113,100",
+                        "endOffsets": "148,250,352,456,559,657,771,872"
+                    },
+                    "to": {
+                        "startLines": "7,8,9,10,11,12,13,67",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "636,734,836,938,1042,1145,1243,6807",
+                        "endColumns": "97,101,101,103,102,97,113,100",
+                        "endOffsets": "729,831,933,1037,1140,1238,1352,6903"
                     }
                 }
             ]
