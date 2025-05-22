@@ -1,25 +1,22 @@
 package com.florescer.ui.screens
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.navigation.NavHostController
-import com.florescer.ui.theme.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.*
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.*
+import androidx.navigation.NavHostController
 import com.florescer.R
-
+import com.florescer.ui.theme.*
 
 @Composable
 fun EvolucaoScreen(navController: NavHostController) {
@@ -27,66 +24,122 @@ fun EvolucaoScreen(navController: NavHostController) {
         colors = listOf(GradienteTop, GradienteBottom)
     )
 
-    // Exemplo de dados fictícios (1 a 5 representa o "nível" de bem-estar)
     val dadosDeHumor = listOf(3, 2, 4, 5, 3, 4, 1)
     val dias = listOf("Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom")
+
+    val maiorHumor = dadosDeHumor.maxOrNull() ?: 0
+    val menorHumor = dadosDeHumor.minOrNull() ?: 0
+    val mediaHumor = dadosDeHumor.average()
+
+    val fraseMotivacional = when {
+        maiorHumor >= 4 -> "✨ Sua semana teve momentos positivos!"
+        menorHumor <= 2 -> "🌧️ Perceba os dias mais difíceis. Se acolha!"
+        else -> "🌿 Você está se cuidando bem! Continue!"
+    }
+
+    val humoresDoMes = List(30) { (1..5).random() }  // Dados fictícios para o mês
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(brush = gradient)
-            .padding(24.dp)
+            .padding(horizontal = 24.dp, vertical = 16.dp)
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
+            Spacer(Modifier.height(16.dp))
+
             Image(
                 painter = painterResource(id = R.drawable.titulo4),
                 contentDescription = "Logo do Florescer",
                 modifier = Modifier
-                    .height(100.dp)
-                    .size(300.dp),
+                    .height(80.dp)
+                    .size(280.dp),
                 contentScale = ContentScale.Fit
             )
+
             Text(
-                text = "Veja como seu humor tem variado ao longo da semana.",
-                fontSize = 15.sp,
+                text = "Humor da Semana",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
                 color = RosaTexto,
                 textAlign = TextAlign.Center
             )
 
-            // Gráfico simples (poderia ser substituído por uma lib externa futuramente)
+            // Gráfico de humor semanal
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(240.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.8f))
+                    .shadow(8.dp, shape = RoundedCornerShape(32.dp)),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                shape = RoundedCornerShape(32.dp)
             ) {
                 Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.SpaceEvenly,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier.padding(24.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     dadosDeHumor.forEachIndexed { index, valor ->
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(dias[index], fontSize = 14.sp, fontWeight = FontWeight.SemiBold, color = RosaTexto)
-                            Text("Humor: $valor/5", fontSize = 14.sp)
+                        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text(
+                                text = dias[index],
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = RosaTexto
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(14.dp)
+                                    .background(Color.LightGray.copy(alpha = 0.3f), shape = RoundedCornerShape(7.dp))
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth(fraction = (valor.coerceAtLeast(1)) / 5f)
+                                        .height(14.dp)
+                                        .background(corDoHumor(valor), shape = RoundedCornerShape(7.dp))
+                                )
+                            }
                         }
                     }
+                }
+            }
+
+            Text(
+                text = fraseMotivacional,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = RosaTexto,
+                textAlign = TextAlign.Center
+            )
+
+            // Resumo com emojis
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .shadow(8.dp, shape = RoundedCornerShape(32.dp)),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                shape = RoundedCornerShape(32.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(24.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Text("📊 Resumo:", fontWeight = FontWeight.Bold, color = RosaTexto, fontSize = 16.sp)
+                    Text("🔝 Maior humor: ${emojiDoHumor(maiorHumor)}")
+                    Text("🔻 Menor humor: ${emojiDoHumor(menorHumor)}")
+                    Text("📈 Média: ${emojiDoHumor(mediaHumor)}")
                 }
             }
 
             Button(
                 onClick = { navController.navigate("notificacoes") },
                 colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
-                shape = RoundedCornerShape(30),
+                shape = RoundedCornerShape(32.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Ver meus Lembretes", color = Branco, fontSize = 18.sp)
@@ -94,8 +147,8 @@ fun EvolucaoScreen(navController: NavHostController) {
 
             Button(
                 onClick = { navController.navigate("recursos") },
-                colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
-                shape = RoundedCornerShape(30),
+                colors = ButtonDefaults.buttonColors(containerColor = RosaTexto),
+                shape = RoundedCornerShape(32.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Voltar", color = Branco, fontSize = 18.sp)
@@ -104,3 +157,25 @@ fun EvolucaoScreen(navController: NavHostController) {
     }
 }
 
+@Composable
+fun corDoHumor(valor: Int): Color {
+    return when (valor) {
+        1 -> Color(0xFFFF8B8B)
+        2 -> Color(0xFFFAB68D)
+        3 -> Color(0xFFFFE895)
+        4 -> Color(0xFF9DF1A9)
+        5 -> Color(0xFFA8C1E8)
+        else -> Color.Gray
+    }
+}
+
+fun emojiDoHumor(valor: Number): String {
+    val num = valor.toDouble()
+    return when {
+        num >= 4.5 -> "😄"
+        num >= 3.5 -> "🙂"
+        num >= 2.5 -> "😐"
+        num >= 1.5 -> "😢"
+        else -> "😭"
+    }
+}

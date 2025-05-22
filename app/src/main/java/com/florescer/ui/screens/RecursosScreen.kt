@@ -46,29 +46,28 @@ fun RecursosScreen(navController: NavHostController) {
                     .size(300.dp),
                 contentScale = ContentScale.Fit
             )
-            // Canal de escuta
+
+            // Cards interativos
+
             Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { navController.navigate("canalEscuta") },
                 colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.8f)),
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier.fillMaxWidth()
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Column(Modifier.padding(16.dp)) {
                     Text("Canal de Escuta", fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = RosaTexto)
                     Text("Converse com alguém que pode te ouvir. Esse canal é anônimo e gratuito.", fontSize = 14.sp)
-                    Button(
-                        onClick = { /* TODO: ação de abrir o canal */ },
-                        modifier = Modifier.padding(top = 8.dp)
-                    ) {
-                        Text("Acessar canal")
-                    }
                 }
             }
 
-            // Orientações
             Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { navController.navigate("orientacoes") },
                 colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.8f)),
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier.fillMaxWidth()
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Column(Modifier.padding(16.dp)) {
                     Text("Orientações", fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = RosaTexto)
@@ -76,23 +75,25 @@ fun RecursosScreen(navController: NavHostController) {
                 }
             }
 
-            // Alerta
             Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { /* Pode exibir um Snackbar ou modal */ },
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFFFE0E0)),
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier.fillMaxWidth()
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Column(Modifier.padding(16.dp)) {
                     Text("Alerta importante", fontWeight = FontWeight.Bold, color = Color.Red, fontSize = 16.sp)
-                    Text("Se você estiver em situação de emergência emocional, procure ajuda imediata.", fontSize = 14.sp)
+                    Text("Se estiver em emergência emocional, procure ajuda imediata.", fontSize = 14.sp)
                 }
             }
 
-            // Orientação profissional
             Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { navController.navigate("profissionais") },
                 colors = CardDefaults.cardColors(containerColor = RosaBotao.copy(alpha = 0.8f)),
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier.fillMaxWidth()
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Column(Modifier.padding(16.dp)) {
                     Text("Orientação profissional", fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Branco)
@@ -103,7 +104,7 @@ fun RecursosScreen(navController: NavHostController) {
                     )
                 }
             }
-            // Botão para navegar para Gráficos
+
             Button(
                 onClick = { navController.navigate("evolucao") },
                 colors = ButtonDefaults.buttonColors(containerColor = RosaTexto),
@@ -115,4 +116,3 @@ fun RecursosScreen(navController: NavHostController) {
         }
     }
 }
-

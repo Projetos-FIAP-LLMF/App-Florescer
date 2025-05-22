@@ -1,12 +1,15 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.florescer.ui.screens
 
 import androidx.compose.foundation.Image
-import androidx.navigation.NavHostController
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,24 +21,28 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.florescer.ui.theme.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavHostController
 import com.florescer.R
-
+import com.florescer.ui.theme.*
 
 @Composable
 fun MoodScreen(navController: NavHostController) {
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
     )
+
     var selectedMood by remember { mutableStateOf<String?>(null) }
     var comment by remember { mutableStateOf(TextFieldValue("")) }
+    var desabafo by remember { mutableStateOf(TextFieldValue("")) }
+    var heartRate by remember { mutableStateOf(TextFieldValue("")) }
+
+    var diaRegistrado by remember { mutableStateOf(false) }
+    var mostrarDialog by remember { mutableStateOf(false) }
 
     val moods = listOf("😄", "😢", "😡", "😰", "😐", "🥰")
-
-    // Lista de sintomas físicos
     val symptoms = listOf("Cansaço", "Fadiga", "Dor de cabeça", "Dores musculares", "Insônia")
     val selectedSymptoms = remember { mutableStateListOf<String>() }
 
@@ -48,7 +55,8 @@ fun MoodScreen(navController: NavHostController) {
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -88,7 +96,6 @@ fun MoodScreen(navController: NavHostController) {
                 }
             }
 
-            // Seção sintomas físicos com checkboxes
             Text(
                 text = "Sintomas físicos:",
                 fontSize = 20.sp,
@@ -127,13 +134,44 @@ fun MoodScreen(navController: NavHostController) {
                     }
                 }
             }
-            // Botão Registrar Humor (registrar tudo)
+
+            OutlinedTextField(
+                value = heartRate,
+                onValueChange = { heartRate = it },
+                label = { Text("Frequência Cardíaca (opcional)") },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = RosaTexto,
+                    unfocusedBorderColor = Color.LightGray,
+                )
+            )
+
+            OutlinedTextField(
+                value = desabafo,
+                onValueChange = { desabafo = it },
+                label = { Text("Quer desabafar?") },
+                placeholder = { Text("Escreva aqui...") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp),
+                shape = RoundedCornerShape(16.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = RosaTexto,
+                    unfocusedBorderColor = Color.LightGray
+                )
+            )
+
             Button(
                 onClick = {
-                    // Exemplo: enviar dados para API
                     println("Humor: $selectedMood")
                     println("Comentário: ${comment.text}")
                     println("Sintomas: $selectedSymptoms")
+                    println("Frequência Cardíaca: ${heartRate.text}")
+                    println("Desabafo: ${desabafo.text}")
+
+                    mostrarDialog = true
+                    diaRegistrado = true
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
                 shape = RoundedCornerShape(30),
@@ -143,7 +181,17 @@ fun MoodScreen(navController: NavHostController) {
                 Text("Registrar Meu Dia", color = Branco, fontSize = 18.sp)
             }
 
-            // Botão para navegar para Sugestões Personalizadas
+            if (diaRegistrado) {
+                Button(
+                    onClick = { navController.navigate("analiseSintomas/${selectedMood}") },
+                    colors = ButtonDefaults.buttonColors(containerColor = RosaTexto),
+                    shape = RoundedCornerShape(30),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Ver recomendações", color = Branco, fontSize = 18.sp)
+                }
+            }
+
             Button(
                 onClick = { navController.navigate("recursos") },
                 colors = ButtonDefaults.buttonColors(containerColor = RosaTexto),
@@ -153,5 +201,18 @@ fun MoodScreen(navController: NavHostController) {
                 Text("Ver Sugestões personalizadas", color = Branco, fontSize = 18.sp)
             }
         }
+    }
+
+    if (mostrarDialog) {
+        AlertDialog(
+            onDismissRequest = { mostrarDialog = false },
+            confirmButton = {
+                TextButton(onClick = { mostrarDialog = false }) {
+                    Text("Ok", color = RosaTexto)
+                }
+            },
+            title = { Text("Parabéns!", fontWeight = FontWeight.Bold, color = RosaTexto) },
+            text = { Text("Você registrou seu dia. Continue se cuidando!") }
+        )
     }
 }

@@ -48,25 +48,19 @@ fun HomeScreen(navController: NavHostController) {
             )
 
             Text(
-                text = "Nossa geração está exausta, ansiosa e sozinha. A Florescer é a ponte entre a dor silenciosa e o cuidado que transforma. Você conhece alguém que nunca precisou de acolhimento emocional?\n" +
-                        "\n" +
-                        "A Florescer nasce como ponte. Entre o colapso e o recomeço. Entre a dor invisível e o cuidado que transforma. Porque no fundo, a gente só quer respirar com leveza.",
+                text = "A Florescer é uma pausa no caos.\n" +
+                        "Um espaço de acolhimento emocional, onde você desacelera, se ouve e se cuida.\n" +
+                        "Aqui, cada pessoa é respeitada no seu tempo — e cuidada com afeto.\n",
                 fontSize = 15.sp,
                 color = Preto,
-                textAlign = TextAlign.Center
-            )
-            Text(
-                text = "Não é apenas um app de bem-estar.",
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Medium,
-                color = RosaTexto,
                 textAlign = TextAlign.Center
             )
 
             Text(
-                text = "É um espaço de pausa no caos. Um lembrete de que seu corpo é corpo, não máquina. Um convite pra desacelerar, se ouvir, se acolher. Aqui, cada pessoa é respeitada no seu tempo — e cuidada com afeto. O que você já fez por você hoje?",
+                text = "O que você já fez por você hoje?",
                 fontSize = 15.sp,
-                color = Preto,
+                fontWeight = FontWeight.Medium,
+                color = RosaTexto,
                 textAlign = TextAlign.Center
             )
 
