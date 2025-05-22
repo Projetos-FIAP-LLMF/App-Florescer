@@ -6,8 +6,6 @@ build/
 # Local configuration files
 local.properties
 
-# Log files
-*.log
 
 # Android Studio
 .idea/
