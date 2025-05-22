@@ -1,0 +1,68 @@
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Local configuration files
+local.properties
+
+# Log files
+*.log
+
+# Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Mac OS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Kotlin
+*.class
+*.jar
+*.war
+*.ear
+
+# Jetpack Compose previews
+**/buildSrc/
+**/out/
+
+# Signing keys
+*.jks
+*.keystore
+
+# NDK
+.externalNativeBuild/
+.cxx/
+
+# Google Services
+google-services.json
+fabric.properties
+
+# Crashlytics
+/crashlytics-build.properties
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+
+# Other
+captures/
+outputs/
+*.hprof
+*.log
+
+# Jetbrains
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# Gradle caches
+**/.gradle/
