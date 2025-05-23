@@ -73,7 +73,6 @@ fun MoodScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            // ✅ LOGO DO FLORESCER
             Image(
                 painter = painterResource(id = R.drawable.titulo2),
                 contentDescription = "Logo do Florescer",
@@ -186,22 +185,13 @@ fun MoodScreen(
 
             if (diaRegistrado) {
                 Button(
-                    onClick = { navController.navigate("analiseSintomas/${moodsText[selectedMood!!]}") },
-                    colors = ButtonDefaults.buttonColors(containerColor = RosaTexto),
+                    onClick = { navController.navigate("analiseSintomas/${selectedMood}") },
+                    colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
                     shape = RoundedCornerShape(30),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Ver recomendações", color = Branco, fontSize = 18.sp)
                 }
-            }
-
-            Button(
-                onClick = { navController.navigate("recursos") },
-                colors = ButtonDefaults.buttonColors(containerColor = RosaTexto),
-                shape = RoundedCornerShape(30),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Ver Sugestões personalizadas", color = Branco, fontSize = 18.sp)
             }
         }
     }

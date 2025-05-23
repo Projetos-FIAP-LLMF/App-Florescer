@@ -74,8 +74,8 @@ fun HomeScreen(navController: NavHostController) {
             }
 
             Text(
-                text = "Ao clicar no botão você aceita a Política de Dados",
-                fontSize = 10.sp,
+                text = "Ao clicar no botão você não é identificado no processo de utilização do aplicativo.",
+                fontSize = 14.sp,
                 textAlign = TextAlign.Center,
                 color = Preto
             )

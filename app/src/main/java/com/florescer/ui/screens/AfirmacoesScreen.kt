@@ -107,7 +107,7 @@ fun AfirmacoesScreen(
 
             Button(
                 onClick = { navController.popBackStack() },
-                colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
+                colors = ButtonDefaults.buttonColors(containerColor = RosaEscuro),
                 shape = RoundedCornerShape(30),
                 modifier = Modifier.fillMaxWidth()
             ) {

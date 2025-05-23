@@ -29,9 +29,8 @@ fun NavGraph(navController: NavHostController, humorRepository: HumorRepository)
         composable("evolucao") {
             EvolucaoScreen(navController, humorRepository)
         }
-
-        composable("notificacoes") {
-            NotificacoesScreen(navController)
+        composable("avaliacao") {
+            AvaliacaoRiscosScreen(navController)
         }
 
         composable(

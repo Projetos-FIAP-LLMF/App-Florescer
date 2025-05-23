@@ -165,23 +165,13 @@ fun EvolucaoScreen(navController: NavHostController, humorRepository: HumorRepos
                     }
                 }
 
-                Button(
-                    onClick = { navController.navigate("notificacoes") },
-                    colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
-                    shape = RoundedCornerShape(32.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Ver meus Lembretes", color = Branco, fontSize = 18.sp)
-                }
-
-                Button(
-                    onClick = { navController.navigate("recursos") },
-                    colors = ButtonDefaults.buttonColors(containerColor = RosaTexto),
-                    shape = RoundedCornerShape(32.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Voltar", color = Branco, fontSize = 18.sp)
-                }
+            Button(
+                onClick = { navController.navigate("trilhas/{mood}") },
+                colors = ButtonDefaults.buttonColors(containerColor = RosaEscuro),
+                shape = RoundedCornerShape(30),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Voltar", color = Branco, fontSize = 18.sp)
             }
         }
     }
