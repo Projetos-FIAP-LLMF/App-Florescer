@@ -4,36 +4,64 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.decode.GifDecoder
 import coil.request.ImageRequest
-import androidx.compose.ui.platform.LocalContext
-import com.florescer.ui.theme.*
 import com.florescer.R
+import com.florescer.data.HumorRepository
+import com.florescer.data.model.Humor
+import com.florescer.data.model.Recomendacao
+import com.florescer.data.model.SintomasEntry
+import com.florescer.ui.theme.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
-fun AnaliseSintomasScreen(navController: NavHostController, mood: String) {
+fun AnaliseSintomasScreen(
+    navController: NavHostController,
+    mood: String,
+    repository: HumorRepository
+) {
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
     )
 
-    val moodGif = when (mood) {
-        "😄" -> R.drawable.happycat
-        "😢" -> R.drawable.sad
-        "😡" -> R.drawable.angry
-        "😰" -> R.drawable.anxious
-        "😐" -> R.drawable.neutral
-        "🥰" -> R.drawable.love
+    val moodGif = when (mood.lowercase()) {
+        "feliz" -> R.drawable.happycat
+        "triste" -> R.drawable.sad
+        "bravo" -> R.drawable.angry
+        "ansioso", "ansiedade", "enjoado" -> R.drawable.anxious
+        "neutro" -> R.drawable.neutral
+        "amoroso" -> R.drawable.love
         else -> R.drawable.neutral
+    }
+
+    var recomendacoes by remember { mutableStateOf<List<Recomendacao>>(emptyList()) }
+    var isLoading by remember { mutableStateOf(false) }
+    var error by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(mood) {
+        isLoading = true
+        error = null
+        try {
+            recomendacoes = withContext(Dispatchers.IO) {
+                repository.getRecomendacoes()
+            }
+        } catch (e: Exception) {
+            error = e.message ?: "Erro desconhecido"
+        } finally {
+            isLoading = false
+        }
     }
 
     Box(
@@ -64,12 +92,32 @@ fun AnaliseSintomasScreen(navController: NavHostController, mood: String) {
                 textAlign = TextAlign.Center
             )
 
-            Text(
-                "Sugerimos que explore uma trilha de bem-estar para acolher suas emoções. 🌻",
-                fontSize = 16.sp,
-                color = Preto,
-                textAlign = TextAlign.Center
-            )
+            if (isLoading) {
+                CircularProgressIndicator(color = RosaTexto)
+            } else if (error != null) {
+                Text(error ?: "Erro", color = RosaTexto)
+            } else {
+                Text(
+                    "Recomendações:",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Preto,
+                    textAlign = TextAlign.Center
+                )
+
+                recomendacoes.forEach { recomendacao ->
+                    recomendacao.descricao?.let {
+                        Text(
+                            it,
+                            fontSize = 14.sp,
+                            color = Preto,
+                            textAlign = TextAlign.Start
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             Button(
                 onClick = { navController.navigate("trilhas/$mood") },

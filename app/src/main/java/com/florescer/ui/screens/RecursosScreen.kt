@@ -1,31 +1,41 @@
 package com.florescer.ui.screens
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.*
 import androidx.navigation.NavHostController
+import com.florescer.data.HumorRepository
 import com.florescer.R
 import com.florescer.ui.theme.*
 
 @Composable
-fun RecursosScreen(navController: NavHostController) {
+fun RecursosScreen(navController: NavHostController, humorRepository: HumorRepository) {
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
     )
+
+    val scope = rememberCoroutineScope()
+    val syncMessage = remember { mutableStateOf("") }
+
+    LaunchedEffect(Unit) {
+        try {
+            val humores = humorRepository.getHumoresLocais()
+            humores.forEach { humor ->
+                humorRepository.sendHumorToBackend(humor)
+            }
+        } catch (e: Exception) {
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -47,7 +57,14 @@ fun RecursosScreen(navController: NavHostController) {
                 contentScale = ContentScale.Fit
             )
 
-            // Cards interativos
+            if (syncMessage.value.isNotEmpty()) {
+                Text(
+                    syncMessage.value,
+                    color = if (syncMessage.value.startsWith("✅")) Color.Green else Color.Red,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center
+                )
+            }
 
             Card(
                 modifier = Modifier
@@ -57,8 +74,16 @@ fun RecursosScreen(navController: NavHostController) {
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("Canal de Escuta", fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = RosaTexto)
-                    Text("Converse com alguém que pode te ouvir. Esse canal é anônimo e gratuito.", fontSize = 14.sp)
+                    Text(
+                        "Canal de Escuta",
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 18.sp,
+                        color = RosaTexto
+                    )
+                    Text(
+                        "Converse com alguém que pode te ouvir. Esse canal é anônimo e gratuito.",
+                        fontSize = 14.sp
+                    )
                 }
             }
 
@@ -70,21 +95,37 @@ fun RecursosScreen(navController: NavHostController) {
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("Orientações", fontWeight = FontWeight.SemiBold, fontSize = 18.sp, color = RosaTexto)
-                    Text("Cuide da sua saúde mental: durma bem, alimente-se com equilíbrio e crie momentos de pausa.", fontSize = 14.sp)
+                    Text(
+                        "Orientações",
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 18.sp,
+                        color = RosaTexto
+                    )
+                    Text(
+                        "Cuide da sua saúde mental: durma bem, alimente-se com equilíbrio e crie momentos de pausa.",
+                        fontSize = 14.sp
+                    )
                 }
             }
 
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { /* Pode exibir um Snackbar ou modal */ },
+                    .clickable { },
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFFFE0E0)),
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("Alerta importante", fontWeight = FontWeight.Bold, color = Color.Red, fontSize = 16.sp)
-                    Text("Se estiver em emergência emocional, procure ajuda imediata.", fontSize = 14.sp)
+                    Text(
+                        "Alerta importante",
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Red,
+                        fontSize = 16.sp
+                    )
+                    Text(
+                        "Se estiver em emergência emocional, procure ajuda imediata.",
+                        fontSize = 14.sp
+                    )
                 }
             }
 
@@ -96,7 +137,12 @@ fun RecursosScreen(navController: NavHostController) {
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("Orientação profissional", fontWeight = FontWeight.Bold, fontSize = 18.sp, color = Branco)
+                    Text(
+                        "Orientação profissional",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        color = Branco
+                    )
                     Text(
                         "Consulte um profissional de saúde mental. Psicólogos e psiquiatras podem ajudar de forma segura e ética.",
                         fontSize = 14.sp,

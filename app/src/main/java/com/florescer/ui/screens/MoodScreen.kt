@@ -4,11 +4,8 @@ package com.florescer.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
@@ -16,26 +13,29 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.florescer.R
+import com.florescer.data.HumorEntry
+import com.florescer.data.HumorRepository
 import com.florescer.ui.theme.*
+import kotlinx.coroutines.launch
 
 @Composable
-fun MoodScreen(navController: NavHostController) {
+fun MoodScreen(
+    navController: NavHostController,
+    humorRepository: HumorRepository
+) {
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
     )
-    
-    // Lista dos emojis
+
     val moodsImages = listOf(
         R.drawable.emoji_feliz,
         R.drawable.emoji_neutro,
@@ -45,17 +45,18 @@ fun MoodScreen(navController: NavHostController) {
         R.drawable.emoji_amor
     )
 
+    val moodsText = listOf("feliz", "neutro", "triste", "bravo", "enjoado", "amoroso")
+
     var selectedMood by remember { mutableStateOf<Int?>(null) }
-    var comment by remember { mutableStateOf(TextFieldValue("")) }
     var desabafo by remember { mutableStateOf(TextFieldValue("")) }
     var heartRate by remember { mutableStateOf(TextFieldValue("")) }
-
     var diaRegistrado by remember { mutableStateOf(false) }
     var mostrarDialog by remember { mutableStateOf(false) }
 
     val symptoms = listOf("Cansaço", "Fadiga", "Dor de cabeça", "Dores musculares", "Insônia")
-    // Lista de sintomas físicos
     val selectedSymptoms = remember { mutableStateListOf<String>() }
+
+    val coroutineScope = rememberCoroutineScope()
 
     Box(
         modifier = Modifier
@@ -71,6 +72,8 @@ fun MoodScreen(navController: NavHostController) {
             verticalArrangement = Arrangement.spacedBy(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+            // ✅ LOGO DO FLORESCER
             Image(
                 painter = painterResource(id = R.drawable.titulo2),
                 contentDescription = "Logo do Florescer",
@@ -83,138 +86,95 @@ fun MoodScreen(navController: NavHostController) {
             Text(
                 text = "Como você está se sentindo hoje?",
                 fontSize = 20.sp,
-                fontWeight = FontWeight.Medium,
-                textAlign = TextAlign.Center,
-                color = RosaTexto
+                fontWeight = FontWeight.Bold,
+                color = RosaTexto,
+                textAlign = TextAlign.Center
             )
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(7.dp),
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                moodsImages.forEach { imageRes ->
-                    val isSelected = selectedMood == imageRes
-
-                    Image(
-                        painter = painterResource(id = imageRes),
-                        contentDescription = "Mood",
-                        modifier = Modifier
-                            .size(56.dp)
-                            .clip(CircleShape)
-                            .border(
-                                width = if (isSelected) 2.dp else 0.dp,
-                                color = if (isSelected) Color(0xFFFFC1E3) else Color.Transparent,
-                                shape = CircleShape
-                            )
-                            .padding(4.dp)
-                            .clickable { selectedMood = imageRes },
-                        contentScale = ContentScale.Crop
-                    )
-                }
-            }
-
-            // Seção sintomas físicos
-            Text(
-                text = "Sintomas físicos:",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = RosaTexto,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                symptoms.forEach { symptom ->
-                    val isChecked = selectedSymptoms.contains(symptom)
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                if (isChecked) selectedSymptoms.remove(symptom)
-                                else selectedSymptoms.add(symptom)
-                            }
-                            .padding(4.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(24.dp)
-                                .border(
-                                    width = 2.dp,
-                                    color = RosaBotao,
-                                    shape = RoundedCornerShape(4.dp)
-                                )
-                        ) {
-                            Checkbox(
-                                checked = isChecked,
-                                onCheckedChange = {
-                                    if (it) selectedSymptoms.add(symptom)
-                                    else selectedSymptoms.remove(symptom)
-                                },
-                                colors = CheckboxDefaults.colors(
-                                    checkedColor = Color.Transparent,
-                                    uncheckedColor = Color.Transparent,
-                                    checkmarkColor = RosaBotao
-                                ),
-                                modifier = Modifier
-                                    .size(24.dp)
-                                    .padding(0.dp)
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.width(8.dp))
-
-                        Text(
-                            text = symptom,
-                            fontSize = 16.sp,
-                            color = RosaTexto
+                moodsImages.forEachIndexed { index, moodRes ->
+                    IconButton(onClick = { selectedMood = index }) {
+                        Icon(
+                            painter = painterResource(id = moodRes),
+                            contentDescription = "Humor ${moodsText[index]}",
+                            tint = if (selectedMood == index) RosaBotao else RosaTexto,
+                            modifier = Modifier.size(48.dp)
                         )
                     }
                 }
             }
 
-            // Botão Registrar Humor
-
-            OutlinedTextField(
-                value = heartRate,
-                onValueChange = { heartRate = it },
-                label = { Text("Frequência Cardíaca (opcional)") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = RosaTexto,
-                    unfocusedBorderColor = Color.LightGray,
-                )
-            )
-
             OutlinedTextField(
                 value = desabafo,
                 onValueChange = { desabafo = it },
                 label = { Text("Quer desabafar?") },
-                placeholder = { Text("Escreva aqui...") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = RosaTexto,
-                    unfocusedBorderColor = Color.LightGray
-                )
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp)
             )
+
+            OutlinedTextField(
+                value = heartRate,
+                onValueChange = { heartRate = it },
+                label = { Text("Batimentos cardíacos (opcional)") },
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp)
+            )
+
+            Text(
+                text = "Sintomas que você sente:",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = RosaTexto
+            )
+
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                symptoms.forEach { symptom ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Checkbox(
+                            checked = selectedSymptoms.contains(symptom),
+                            onCheckedChange = {
+                                if (it) selectedSymptoms.add(symptom)
+                                else selectedSymptoms.remove(symptom)
+                            },
+                            colors = CheckboxDefaults.colors(checkedColor = RosaBotao)
+                        )
+                        Text(text = symptom, color = RosaTexto)
+                    }
+                }
+            }
 
             Button(
                 onClick = {
-                    println("Humor: $selectedMood")
-                    println("Comentário: ${comment.text}")
-                    println("Sintomas: $selectedSymptoms")
-                    println("Frequência Cardíaca: ${heartRate.text}")
-                    println("Desabafo: ${desabafo.text}")
+                    if (selectedMood != null) {
+                        val humor = HumorEntry(
+                            mood = moodsText[selectedMood!!],
+                            symptoms = selectedSymptoms.joinToString(", "),
+                            heartRate = heartRate.text,
+                            comment = desabafo.text,
+                            timestamp = System.currentTimeMillis()
+                        )
 
-                    mostrarDialog = true
-                    diaRegistrado = true
+                        coroutineScope.launch {
+                            try {
+                                humorRepository.saveHumorLocal(humor)
+                                humorRepository.sendHumorToBackend(humor)
+                                mostrarDialog = true
+                                diaRegistrado = true
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
                 shape = RoundedCornerShape(30),
@@ -226,7 +186,7 @@ fun MoodScreen(navController: NavHostController) {
 
             if (diaRegistrado) {
                 Button(
-                    onClick = { navController.navigate("analiseSintomas/${selectedMood}") },
+                    onClick = { navController.navigate("analiseSintomas/${moodsText[selectedMood!!]}") },
                     colors = ButtonDefaults.buttonColors(containerColor = RosaTexto),
                     shape = RoundedCornerShape(30),
                     modifier = Modifier.fillMaxWidth()

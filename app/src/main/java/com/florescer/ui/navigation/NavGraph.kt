@@ -7,10 +7,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.NavHostController
+import com.florescer.data.HumorRepository
 import com.florescer.ui.screens.*
 
 @Composable
-fun NavGraph(navController: NavHostController) {
+fun NavGraph(navController: NavHostController, humorRepository: HumorRepository) {
     NavHost(
         navController = navController,
         startDestination = "home"
@@ -19,14 +20,16 @@ fun NavGraph(navController: NavHostController) {
             HomeScreen(navController)
         }
         composable("mood") {
-            MoodScreen(navController)
+            MoodScreen(navController, humorRepository)
         }
         composable("recursos") {
-            RecursosScreen(navController)
+            RecursosScreen(navController, humorRepository)
         }
+
         composable("evolucao") {
-            EvolucaoScreen(navController)
+            EvolucaoScreen(navController, humorRepository)
         }
+
         composable("notificacoes") {
             NotificacoesScreen(navController)
         }
@@ -35,7 +38,7 @@ fun NavGraph(navController: NavHostController) {
             route = "trilhas/{mood}",
             arguments = listOf(navArgument("mood") { type = NavType.StringType })
         ) { backStackEntry ->
-            val mood = backStackEntry.arguments?.getString("mood") ?: "😐"
+            val mood = backStackEntry.arguments?.getString("mood") ?: "feliz"
             TrilhasScreen(navController, mood = mood)
         }
 
@@ -43,13 +46,13 @@ fun NavGraph(navController: NavHostController) {
             route = "analiseSintomas/{mood}",
             arguments = listOf(navArgument("mood") { type = NavType.StringType })
         ) { backStackEntry ->
-            val mood = backStackEntry.arguments?.getString("mood") ?: "😐"
-            AnaliseSintomasScreen(navController, mood = mood)
+            val mood = backStackEntry.arguments?.getString("mood") ?: "neutro"
+            AnaliseSintomasScreen(navController, mood, humorRepository)
         }
 
         composable("afirmacoes/{mood}") { backStackEntry ->
-            val mood = backStackEntry.arguments?.getString("mood") ?: ""
-            AfirmacoesScreen(navController, mood)
+            val mood = backStackEntry.arguments?.getString("mood") ?: "neutro"
+            AfirmacoesScreen(navController, mood, humorRepository)
         }
 
 

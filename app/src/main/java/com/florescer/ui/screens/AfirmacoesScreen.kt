@@ -4,7 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -13,42 +13,38 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.florescer.data.HumorRepository
+import com.florescer.data.model.Afirmacao
 import com.florescer.ui.theme.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
-fun AfirmacoesScreen(navController: NavHostController, mood: String) {
+fun AfirmacoesScreen(
+    navController: NavHostController,
+    mood: String,
+    repository: HumorRepository
+) {
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
     )
 
-    val afirmacoes = when (mood) {
-        "😄" -> listOf(
-            "💬 Continue espalhando sua alegria! 😊",
-            "💬 Sua felicidade inspira quem está ao seu redor!"
-        )
-        "😢" -> listOf(
-            "💬 Tudo bem não estar bem o tempo todo. Você é forte! 💛",
-            "💬 Sua tristeza merece acolhimento e carinho. Respire e se abrace. 🤍"
-        )
-        "😡" -> listOf(
-            "💬 Sua raiva é válida, mas não define quem você é. 🌿",
-            "💬 Respire fundo. Você está no controle das suas emoções. 🧘‍♀️"
-        )
-        "😰" -> listOf(
-            "💬 A ansiedade não é mais forte que você. Um passo de cada vez. 🌻",
-            "💬 Você merece paz. Respire e acolha sua jornada. 💫"
-        )
-        "😐" -> listOf(
-            "💬 Mesmo nos dias neutros, você é importante. 🌼",
-            "💬 A sua presença no mundo faz diferença. 💚"
-        )
-        "🥰" -> listOf(
-            "💬 Que bom sentir amor! Compartilhe e receba afeto. ❤️",
-            "💬 O amor que você sente torna o mundo mais leve. 🌸"
-        )
-        else -> listOf(
-            "💬 Você é suficiente, exatamente como é. 🌿"
-        )
+    var afirmacoes by remember { mutableStateOf<List<Afirmacao>>(emptyList()) }
+    var isLoading by remember { mutableStateOf(true) }
+    var error by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(mood) {
+        isLoading = true
+        error = null
+        try {
+            afirmacoes = withContext(Dispatchers.IO) {
+                repository.getAfirmacoesPorHumor(mood)
+            }
+        } catch (e: Exception) {
+            error = e.message ?: "Erro desconhecido"
+        } finally {
+            isLoading = false
+        }
     }
 
     Box(
@@ -71,35 +67,38 @@ fun AfirmacoesScreen(navController: NavHostController, mood: String) {
                 textAlign = TextAlign.Center
             )
 
-            Text(
-                text = "Escolha a afirmação que mais acolhe seu momento.",
-                fontSize = 14.sp,
-                color = RosaTexto.copy(alpha = 0.8f),
-                textAlign = TextAlign.Center
-            )
-
-            afirmacoes.forEach { afirmacao ->
-                Card(
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(containerColor = RosaBotao),
-                    elevation = CardDefaults.cardElevation(8.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(min = 60.dp)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = afirmacao,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = Branco,
-                            textAlign = TextAlign.Center
-                        )
+            when {
+                isLoading -> {
+                    CircularProgressIndicator(color = RosaTexto)
+                }
+                error != null -> {
+                    Text(error ?: "Erro desconhecido", color = RosaTexto)
+                }
+                else -> {
+                    afirmacoes.forEach { afirmacao ->
+                        Card(
+                            shape = RoundedCornerShape(20.dp),
+                            colors = CardDefaults.cardColors(containerColor = RosaBotao),
+                            elevation = CardDefaults.cardElevation(8.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .heightIn(min = 60.dp)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = afirmacao.texto,
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    color = Branco,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                        }
                     }
                 }
             }
