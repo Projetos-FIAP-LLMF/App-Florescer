@@ -120,6 +120,15 @@ fun AvaliacaoRiscosScreen(navController: NavHostController) {
             }
 
             Button(
+                onClick = { navController.navigate("recursos") },
+                colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
+                shape = RoundedCornerShape(30),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Procurar Ajuda", color = Branco, fontSize = 18.sp)
+            }
+
+            Button(
                 onClick = { navController.navigate("trilhas/{mood}") },
                 colors = ButtonDefaults.buttonColors(containerColor = RosaEscuro),
                 shape = RoundedCornerShape(30),
