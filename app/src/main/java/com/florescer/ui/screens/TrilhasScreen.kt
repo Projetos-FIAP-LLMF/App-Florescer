@@ -17,6 +17,7 @@ import com.florescer.ui.theme.Branco
 import com.florescer.ui.theme.GradienteBottom
 import com.florescer.ui.theme.GradienteTop
 import com.florescer.ui.theme.RosaBotao
+import com.florescer.ui.theme.RosaEscuro
 import com.florescer.ui.theme.RosaTexto
 
 @Composable
@@ -65,6 +66,24 @@ fun TrilhasScreen(navController: NavHostController, mood: String) {
                 ) {
                     Text(label, fontSize = 16.sp, color = Branco, modifier = Modifier.padding(8.dp))
                 }
+            }
+
+            Button(
+                onClick = { navController.navigate("evolucao") },
+                colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
+                shape = RoundedCornerShape(30),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Ver meus Dados", color = Branco, fontSize = 18.sp)
+            }
+
+            Button(
+                onClick = { navController.navigate("mood") },
+                colors = ButtonDefaults.buttonColors(containerColor = RosaEscuro),
+                shape = RoundedCornerShape(30),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Voltar", color = Branco, fontSize = 18.sp)
             }
         }
     }

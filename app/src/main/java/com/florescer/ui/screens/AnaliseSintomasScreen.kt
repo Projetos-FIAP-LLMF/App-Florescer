@@ -79,6 +79,15 @@ fun AnaliseSintomasScreen(navController: NavHostController, mood: String) {
             ) {
                 Text("Ver Trilha de Bem-Estar", color = Branco, fontSize = 18.sp)
             }
+
+            Button(
+                onClick = { navController.navigate("avaliacao") },
+                colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
+                shape = RoundedCornerShape(30),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Fazer Minha Autoavaliação", color = Branco, fontSize = 18.sp)
+            }
         }
     }
 }

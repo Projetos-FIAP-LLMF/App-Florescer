@@ -31,6 +31,10 @@ fun NavGraph(navController: NavHostController) {
             NotificacoesScreen(navController)
         }
 
+        composable("avaliacao") {
+            AvaliacaoRiscosScreen(navController)
+        }
+
         composable(
             route = "trilhas/{mood}",
             arguments = listOf(navArgument("mood") { type = NavType.StringType })
