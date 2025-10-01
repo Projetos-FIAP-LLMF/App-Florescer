@@ -4,7 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -14,15 +14,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.florescer.ui.theme.*
 import androidx.compose.foundation.Image
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import com.florescer.R
+import com.florescer.ui.auth.AuthViewModel
 import androidx.navigation.NavHostController
-
+import com.florescer.ui.auth.AuthUiState
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
-    // Gradiente de fundo vertical
+fun HomeScreen(
+    navController: NavHostController,
+    authViewModel: AuthViewModel
+) {
+    val uiState by authViewModel.uiState.collectAsState()
+
+    // Gradiente de fundo
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
     )
@@ -42,8 +48,8 @@ fun HomeScreen(navController: NavHostController) {
                 painter = painterResource(id = R.drawable.titulo),
                 contentDescription = "Logo do Florescer",
                 modifier = Modifier
-                    .height(100.dp)
-                    .size(400.dp),
+                    .width(400.dp)
+                    .height(100.dp),
                 contentScale = ContentScale.Fit
             )
 
@@ -64,13 +70,38 @@ fun HomeScreen(navController: NavHostController) {
                 textAlign = TextAlign.Center
             )
 
-            Button(
-                onClick = { navController.navigate("mood") },
-                colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
-                shape = RoundedCornerShape(30),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Começar", color = Branco, fontSize = 20.sp)
+            when (uiState) {
+                is AuthUiState.Carregando -> CircularProgressIndicator()
+
+                is AuthUiState.Idle,
+                is AuthUiState.Erro -> {
+                    Button(
+                        onClick = { authViewModel.onComecarClicked() },
+                        colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
+                        shape = RoundedCornerShape(30),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Começar", color = Branco, fontSize = 20.sp)
+                    }
+                }
+
+                is AuthUiState.Sucesso -> {
+                    // já navega quando tiver sucesso
+                    LaunchedEffect(Unit) {
+                        navController.navigate("mood") {
+                            popUpTo("home") { inclusive = true }
+                        }
+                    }
+                }
+            }
+
+            if (uiState is AuthUiState.Erro) {
+                Text(
+                    text = (uiState as AuthUiState.Erro).mensagem,
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.error,
+                    textAlign = TextAlign.Center
+                )
             }
 
             Text(
@@ -82,3 +113,5 @@ fun HomeScreen(navController: NavHostController) {
         }
     }
 }
+
+

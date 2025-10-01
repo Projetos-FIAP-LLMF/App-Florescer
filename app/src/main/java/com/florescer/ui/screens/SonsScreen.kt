@@ -1,3 +1,5 @@
+package com.florescer.ui.screens
+
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import androidx.compose.foundation.background

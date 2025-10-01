@@ -5,10 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
-import com.florescer.data.AppDatabase
+import com.florescer.data.AuthRepository
 import com.florescer.data.HumorRepository
-import com.florescer.data.network.HumorApi
-import com.florescer.data.network.RetrofitInstance
 import com.florescer.ui.navigation.NavGraph
 import com.florescer.ui.theme.FlorescerTheme
 
@@ -17,34 +15,29 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         actionBar?.hide()
 
-        val database = AppDatabase.getInstance(this)
-        val humorDao = database.humorDao()
+        // Obtém o container da Application
+        val appContainer = (application as MyApplication).container
 
-        val humorApi = RetrofitInstance.api
-        val afirmacoesApi = RetrofitInstance.afirmacoesApi
-        val analiseSintomasApi = RetrofitInstance.analiseSintomasApi
-        val recomendacoesApi = RetrofitInstance.recomendacoesApi
-        val evolucaoApi = RetrofitInstance.evolucaoApi
-
-
-        val humorRepository = HumorRepository(
-            humorApi,
-            afirmacoesApi,
-            analiseSintomasApi,
-            recomendacoesApi,
-            evolucaoApi,
-            humorDao
-        )
         setContent {
-            FlorescerApp(humorRepository)
+            FlorescerApp(
+                humorRepository = appContainer.humorRepository,
+                authRepository = appContainer.authRepository
+            )
         }
     }
 }
 
 @Composable
-fun FlorescerApp(humorRepository: HumorRepository) {
+fun FlorescerApp(
+    humorRepository: HumorRepository,
+    authRepository: AuthRepository
+) {
     FlorescerTheme {
         val navController = rememberNavController()
-        NavGraph(navController = navController, humorRepository = humorRepository)
+        NavGraph(
+            navController = navController,
+            humorRepository = humorRepository,
+            authRepository = authRepository
+        )
     }
 }

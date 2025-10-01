@@ -4,7 +4,6 @@ import com.florescer.data.model.Afirmacao
 import com.florescer.data.model.EvolucaoHistorico
 import com.florescer.data.model.Humor
 import com.florescer.data.model.HumorDTO
-import com.florescer.data.model.HumorDao
 import com.florescer.data.model.Recomendacao
 import com.florescer.data.model.SintomasEntry
 import com.florescer.data.network.AfirmacoesApi
@@ -51,5 +50,4 @@ class HumorRepository(
     suspend fun getRecomendacoes(): List<Recomendacao> = recomendacoesApi.get()
 
     suspend fun getHistoricoEvolucao(): List<EvolucaoHistorico> = evolucaoApi.getHistoricos()
-
 }

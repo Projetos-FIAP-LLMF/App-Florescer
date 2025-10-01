@@ -1,4 +1,4 @@
-package com.florescer.data.model
+package com.florescer.data
 
 import androidx.room.Dao
 import androidx.room.Delete

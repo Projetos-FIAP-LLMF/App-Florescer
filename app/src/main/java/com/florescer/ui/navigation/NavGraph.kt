@@ -1,27 +1,52 @@
 package com.florescer.ui.navigation
 
-import SonsScreen
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavType
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import androidx.navigation.NavHostController
-import com.florescer.data.HumorRepository
 import com.florescer.ui.screens.*
+import com.florescer.ui.auth.AuthScreen
+import com.florescer.data.AuthRepository
+import com.florescer.data.HumorRepository
+import com.florescer.ui.auth.AuthViewModel
+import com.florescer.ui.auth.AuthViewModelFactory
 
 @Composable
-fun NavGraph(navController: NavHostController, humorRepository: HumorRepository) {
+fun NavGraph(
+    navController: NavHostController,
+    humorRepository: HumorRepository,
+    authRepository: AuthRepository
+) {
     NavHost(
         navController = navController,
-        startDestination = "home"
+        startDestination = "auth"
     ) {
-        composable("home") {
-            HomeScreen(navController)
+        // Tela de autenticação
+        composable("auth") {
+            AuthScreen(
+                authRepository = authRepository,
+                onTokenObtido = {
+                    navController.navigate("home") {
+                        popUpTo("auth") { inclusive = true }
+                    }
+                }
+            )
         }
+
+        composable("home") {
+            val authViewModel: AuthViewModel = viewModel(
+                factory = AuthViewModelFactory(authRepository)
+            )
+            HomeScreen(navController, authViewModel)
+        }
+
         composable("mood") {
             MoodScreen(navController, humorRepository)
         }
+
         composable("recursos") {
             RecursosScreen(navController, humorRepository)
         }
@@ -29,6 +54,7 @@ fun NavGraph(navController: NavHostController, humorRepository: HumorRepository)
         composable("evolucao") {
             EvolucaoScreen(navController, humorRepository)
         }
+
         composable("avaliacao") {
             AvaliacaoRiscosScreen(navController)
         }
@@ -54,13 +80,14 @@ fun NavGraph(navController: NavHostController, humorRepository: HumorRepository)
             AfirmacoesScreen(navController, mood, humorRepository)
         }
 
-
         composable("videos") {
             VideosScreen(navController)
         }
 
-        composable("sons") {
-            SonsScreen(navController)
-        }
+        // Removi a rota "sons" pois SonsScreen não foi fornecida
+        // Se você tiver essa tela, adicione aqui:
+        // composable("sons") {
+        //     SonsScreen(navController)
+        // }
     }
 }

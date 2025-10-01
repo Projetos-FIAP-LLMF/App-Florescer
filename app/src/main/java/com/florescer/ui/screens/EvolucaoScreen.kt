@@ -19,13 +19,37 @@ import com.florescer.data.HumorRepository
 import com.florescer.data.model.EvolucaoHistorico
 import com.florescer.ui.theme.*
 
+fun corDoHumorTexto(humor: String): Color {
+    return when (humor.lowercase()) {
+        "amoroso" -> Color(0xFFFFC1E3) // Rosa claro
+        "feliz" -> Color(0xFFFFEB3B)   // Amarelo
+        "neutro" -> Color(0xFF9E9E9E)  // Cinza
+        "triste" -> Color(0xFF2196F3)  // Azul
+        "bravo" -> Color(0xFFF44336)   // Vermelho
+        else -> Color.Gray
+    }
+}
+
+fun emojiDoHumor(valor: Number): String {
+    val num = valor.toDouble()
+    return when {
+        num >= 4.5 -> "😄"
+        num >= 3.5 -> "🙂"
+        num >= 2.5 -> "😐"
+        num >= 1.5 -> "😢"
+        else -> "😭"
+    }
+}
 @Composable
 fun EvolucaoScreen(navController: NavHostController, humorRepository: HumorRepository) {
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
     )
 
-    val evolucao by produceState<List<EvolucaoHistorico>>(initialValue = emptyList(), humorRepository) {
+    val evolucao by produceState<List<EvolucaoHistorico>>(
+        initialValue = emptyList(),
+        humorRepository
+    ) {
         value = try {
             humorRepository.getHistoricoEvolucao()
         } catch (e: Exception) {
@@ -115,18 +139,23 @@ fun EvolucaoScreen(navController: NavHostController, humorRepository: HumorRepos
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(14.dp)
-                                        .background(Color.LightGray.copy(alpha = 0.3f), shape = RoundedCornerShape(7.dp))
+                                        .background(
+                                            Color.LightGray.copy(alpha = 0.3f),
+                                            shape = RoundedCornerShape(7.dp)
+                                        )
                                 ) {
                                     Box(
                                         modifier = Modifier
-                                            .fillMaxWidth(fraction = when (item.humor.lowercase()) {
-                                                "amoroso" -> 1f
-                                                "feliz" -> 0.8f
-                                                "neutro" -> 0.6f
-                                                "triste" -> 0.4f
-                                                "bravo" -> 0.2f
-                                                else -> 0.1f
-                                            })
+                                            .fillMaxWidth(
+                                                fraction = when (item.humor.lowercase()) {
+                                                    "amoroso" -> 1f
+                                                    "feliz" -> 0.8f
+                                                    "neutro" -> 0.6f
+                                                    "triste" -> 0.4f
+                                                    "bravo" -> 0.2f
+                                                    else -> 0.1f
+                                                }
+                                            )
                                             .height(14.dp)
                                             .background(
                                                 corDoHumorTexto(item.humor),
@@ -158,43 +187,27 @@ fun EvolucaoScreen(navController: NavHostController, humorRepository: HumorRepos
                         modifier = Modifier.padding(24.dp),
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        Text("📊 Resumo:", fontWeight = FontWeight.Bold, color = RosaTexto, fontSize = 16.sp)
+                        Text(
+                            "📊 Resumo:",
+                            fontWeight = FontWeight.Bold,
+                            color = RosaTexto,
+                            fontSize = 16.sp
+                        )
                         Text("🔝 Maior humor: ${emojiDoHumor(maiorHumor)}")
                         Text("🔻 Menor humor: ${emojiDoHumor(menorHumor)}")
                         Text("📈 Média: $mediaEmoji")
                     }
                 }
 
-            Button(
-                onClick = { navController.navigate("trilhas/{mood}") },
-                colors = ButtonDefaults.buttonColors(containerColor = RosaEscuro),
-                shape = RoundedCornerShape(30),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Voltar", color = Branco, fontSize = 18.sp)
+                Button(
+                    onClick = { navController.navigate("trilhas/{mood}") },
+                    colors = ButtonDefaults.buttonColors(containerColor = RosaEscuro),
+                    shape = RoundedCornerShape(30),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Voltar", color = Branco, fontSize = 18.sp)
+                }
             }
         }
-    }
-}
-
-fun corDoHumorTexto(humor: String): Color {
-    return when (humor.lowercase()) {
-        "amoroso" -> Color(0xFFFFC1E3) // Rosa claro
-        "feliz" -> Color(0xFFFFEB3B)   // Amarelo
-        "neutro" -> Color(0xFF9E9E9E)  // Cinza
-        "triste" -> Color(0xFF2196F3)  // Azul
-        "bravo" -> Color(0xFFF44336)   // Vermelho
-        else -> Color.Gray
-    }
-}
-
-fun emojiDoHumor(valor: Number): String {
-    val num = valor.toDouble()
-    return when {
-        num >= 4.5 -> "😄"
-        num >= 3.5 -> "🙂"
-        num >= 2.5 -> "😐"
-        num >= 1.5 -> "😢"
-        else -> "😭"
     }
 }
