@@ -25,12 +25,14 @@ import com.florescer.data.model.SintomasEntry
 import com.florescer.ui.theme.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import com.florescer.data.AuthRepository
 
 @Composable
 fun AnaliseSintomasScreen(
     navController: NavHostController,
     mood: String,
-    repository: HumorRepository
+    repository: HumorRepository,
+    authRepository : AuthRepository
 ) {
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
@@ -45,17 +47,22 @@ fun AnaliseSintomasScreen(
         "amoroso" -> R.drawable.love
         else -> R.drawable.neutral
     }
-
+    var token by remember { mutableStateOf<String?>(null) }
     var recomendacoes by remember { mutableStateOf<List<Recomendacao>>(emptyList()) }
     var isLoading by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf<String?>(null) }
 
-    LaunchedEffect(mood) {
+    LaunchedEffect(Unit) {
+        token = authRepository.getStoredToken() ?: "default-token"
+    }
+
+    LaunchedEffect(token,mood) {
+        if (token == null) return@LaunchedEffect
         isLoading = true
         error = null
         try {
             recomendacoes = withContext(Dispatchers.IO) {
-                repository.getRecomendacoes()
+                repository.getRecomendacoes(userId = token!!, limit = 5)
             }
         } catch (e: Exception) {
             error = e.message ?: "Erro desconhecido"

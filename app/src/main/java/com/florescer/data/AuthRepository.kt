@@ -4,24 +4,13 @@ import com.florescer.data.network.AuthApi
 import com.florescer.data.TokenDao
 
 
-class AuthRepository(private val  api: AuthApi,
-                     private val tokenDao: TokenDao,
-        private val authApi: AuthApi,
+class AuthRepository(
+    private val api: AuthApi,
+    private val tokenDao: TokenDao
 ) {
-
-    suspend fun generateAndSaveToken(): Result<String> {
-        return try {
-            val response = api.generateToken()
-            if (response.isSuccessful) {
-                val token = response.body() ?: ""
-                saveToken(token)
-                Result.success(token)
-            } else {
-                Result.failure(Exception("Error ${response.code()}"))
-            }
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    suspend fun getUserId(): String {
+        val storedToken = tokenDao.getToken()
+        return storedToken?.token ?: "default-user-id"
     }
 
     private fun saveToken(token: String) {
@@ -33,6 +22,8 @@ class AuthRepository(private val  api: AuthApi,
     }
 
     suspend fun getStoredToken(): String? {
-        return null
+        // aqui você busca no banco ou retorna null/default
+        val storedTokenEntity = tokenDao.getToken() // supondo que você tenha essa função
+        return storedTokenEntity?.token
     }
 }

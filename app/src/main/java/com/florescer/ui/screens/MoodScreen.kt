@@ -166,7 +166,7 @@ fun MoodScreen(
                         coroutineScope.launch {
                             try {
                                 humorRepository.saveHumorLocal(humor)
-                                humorRepository.sendHumorToBackend(humor)
+                                humorRepository.sendHumorToBackend(humor, "null")
                                 mostrarDialog = true
                                 diaRegistrado = true
                             } catch (e: Exception) {

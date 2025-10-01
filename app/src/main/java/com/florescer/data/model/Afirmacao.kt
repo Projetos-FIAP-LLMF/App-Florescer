@@ -1,10 +1,11 @@
 package com.florescer.data.model
 
 data class AfirmacoesPorHumor(
+    val id: String,
     val mood: String,
-    val afirmacoes: List<Afirmacao>
+    val affirmations: List<Afirmacao>
 )
 
 data class Afirmacao(
-    val texto: String
+    val text: String
 )

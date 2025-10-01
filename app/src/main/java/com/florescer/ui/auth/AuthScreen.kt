@@ -12,7 +12,7 @@ import com.florescer.data.AuthRepository
 @Composable
 fun AuthScreen(
     authRepository: AuthRepository,
-    onTokenObtido: () -> Unit
+    onTokenObtido: (String) -> Unit
 ) {
     val viewModel: AuthViewModel = viewModel(
         factory = AuthViewModelFactory(authRepository)
@@ -20,10 +20,9 @@ fun AuthScreen(
 
     val uiState by viewModel.uiState.collectAsState()
 
-    // Se já tem token, navega automaticamente
     LaunchedEffect(uiState) {
         if (uiState is AuthUiState.Sucesso) {
-            onTokenObtido()
+            onTokenObtido((uiState as AuthUiState.Sucesso).userId) // Aqui funciona, pois dentro do 'if' ele é do tipo Sucesso
         }
     }
 
@@ -56,7 +55,7 @@ fun AuthScreen(
                 }
             }
             is AuthUiState.Sucesso -> {
-                // Navegação automática via LaunchedEffect
+                // Apenas indicador enquanto navegação é disparada
                 CircularProgressIndicator()
             }
             is AuthUiState.Erro -> {

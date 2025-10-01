@@ -10,47 +10,30 @@ import kotlinx.coroutines.launch
 sealed class AuthUiState {
     object Idle : AuthUiState()
     object Carregando : AuthUiState()
-    data class Sucesso(val token: String) : AuthUiState()
+    data class Sucesso(val userId: String) : AuthUiState()
     data class Erro(val mensagem: String) : AuthUiState()
 }
 
-class AuthViewModel(
-    private val authRepository: AuthRepository
-) : ViewModel() {
+class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow<AuthUiState>(AuthUiState.Idle)
     val uiState: StateFlow<AuthUiState> = _uiState
 
-    init {
-        checkExistingToken()
-    }
-
-    private fun checkExistingToken() {
-        viewModelScope.launch {
-            val hasToken = authRepository.hasToken()
-            if (hasToken) {
-                val token = authRepository.getStoredToken()
-                _uiState.value = AuthUiState.Sucesso(token ?: "")
-            }
-        }
-    }
-
     fun onComecarClicked() {
         viewModelScope.launch {
             _uiState.value = AuthUiState.Carregando
-
-            val result = authRepository.generateAndSaveToken()
-
-            _uiState.value = if (result.isSuccess) {
-                AuthUiState.Sucesso(result.getOrNull() ?: "")
-            } else {
-                AuthUiState.Erro(result.exceptionOrNull()?.message ?: "Erro desconhecido")
+            try {
+                val userId = authRepository.getUserId() // só pega o userId
+                _uiState.value = AuthUiState.Sucesso(userId)
+            } catch (e: Exception) {
+                _uiState.value = AuthUiState.Erro(e.message ?: "Erro desconhecido")
             }
         }
     }
 
-    fun getToken(): String? {
+
+    fun getUserId(): String? {
         val state = _uiState.value
-        return if (state is AuthUiState.Sucesso) state.token else null
+        return if (state is AuthUiState.Sucesso) state.userId else null
     }
 }

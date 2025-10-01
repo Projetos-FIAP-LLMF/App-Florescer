@@ -15,11 +15,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavHostController
 import com.florescer.R
+import com.florescer.data.AuthRepository
 import com.florescer.data.HumorRepository
 import com.florescer.data.model.EvolucaoHistorico
 import com.florescer.ui.theme.*
 
 fun corDoHumorTexto(humor: String): Color {
+
     return when (humor.lowercase()) {
         "amoroso" -> Color(0xFFFFC1E3) // Rosa claro
         "feliz" -> Color(0xFFFFEB3B)   // Amarelo
@@ -41,17 +43,22 @@ fun emojiDoHumor(valor: Number): String {
     }
 }
 @Composable
-fun EvolucaoScreen(navController: NavHostController, humorRepository: HumorRepository) {
+fun EvolucaoScreen(navController: NavHostController, humorRepository: HumorRepository, authRepository : AuthRepository) {
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
     )
 
+    var token by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(Unit) {
+        token = authRepository.getStoredToken() ?: "default-token"
+    }
     val evolucao by produceState<List<EvolucaoHistorico>>(
         initialValue = emptyList(),
         humorRepository
     ) {
         value = try {
-            humorRepository.getHistoricoEvolucao()
+            humorRepository.getHistoricoEvolucao(userId = token!!, dateTo = null, dateFrom = null, limit = null)
         } catch (e: Exception) {
             e.printStackTrace()
             emptyList()

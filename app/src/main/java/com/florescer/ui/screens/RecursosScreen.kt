@@ -37,7 +37,7 @@ fun RecursosScreen(navController: NavHostController, humorRepository: HumorRepos
         try {
             val humores = humorRepository.getHumoresLocais()
             humores.forEach { humor ->
-                humorRepository.sendHumorToBackend(humor)
+                humorRepository.sendHumorToBackend(humor, "null")
             }
             syncMessage.value = "✅ Dados sincronizados com sucesso!"
         } catch (e: Exception) {

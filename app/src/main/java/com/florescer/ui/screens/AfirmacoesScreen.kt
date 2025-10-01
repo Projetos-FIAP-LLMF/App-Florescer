@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.florescer.data.AuthRepository
 import com.florescer.data.HumorRepository
 import com.florescer.data.model.Afirmacao
 import com.florescer.ui.theme.*
@@ -23,23 +24,19 @@ import kotlinx.coroutines.withContext
 fun AfirmacoesScreen(
     navController: NavHostController,
     mood: String,
-    repository: HumorRepository
+    repository: HumorRepository,
+    authRepository: AuthRepository
 ) {
-    val gradient = Brush.verticalGradient(
-        colors = listOf(GradienteTop, GradienteBottom)
-    )
-
+    var token by remember { mutableStateOf("default-token") }
     var afirmacoes by remember { mutableStateOf<List<Afirmacao>>(emptyList()) }
     var isLoading by remember { mutableStateOf(true) }
     var error by remember { mutableStateOf<String?>(null) }
 
-    LaunchedEffect(mood) {
-        isLoading = true
-        error = null
+    // Buscar token armazenado
+    LaunchedEffect(Unit) {
+        token = authRepository.getStoredToken() ?: "default-token"
         try {
-            afirmacoes = withContext(Dispatchers.IO) {
-                repository.getAfirmacoesPorHumor(mood)
-            }
+            afirmacoes = repository.getAfirmacoesPorHumor(token, mood)
         } catch (e: Exception) {
             error = e.message ?: "Erro desconhecido"
         } finally {
@@ -50,7 +47,7 @@ fun AfirmacoesScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(gradient)
+            .background(GradienteTop)
             .padding(24.dp),
         contentAlignment = Alignment.Center
     ) {
@@ -91,7 +88,7 @@ fun AfirmacoesScreen(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = afirmacao.texto,
+                                    text = afirmacao.text,  // Ajustado para bater com o JSON
                                     fontSize = 16.sp,
                                     fontWeight = FontWeight.Medium,
                                     color = Branco,

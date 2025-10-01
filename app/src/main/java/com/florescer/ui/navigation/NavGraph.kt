@@ -28,15 +28,20 @@ fun NavGraph(
         composable("auth") {
             AuthScreen(
                 authRepository = authRepository,
-                onTokenObtido = {
-                    navController.navigate("home") {
+                onTokenObtido = { userId ->
+                    navController.navigate("home/$userId") {
                         popUpTo("auth") { inclusive = true }
                     }
                 }
             )
         }
 
-        composable("home") {
+        // Home recebe userId na rota
+        composable(
+            route = "home/{userId}",
+            arguments = listOf(navArgument("userId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val userId = backStackEntry.arguments?.getString("userId") ?: ""
             val authViewModel: AuthViewModel = viewModel(
                 factory = AuthViewModelFactory(authRepository)
             )
@@ -52,7 +57,7 @@ fun NavGraph(
         }
 
         composable("evolucao") {
-            EvolucaoScreen(navController, humorRepository)
+            EvolucaoScreen(navController, humorRepository, authRepository)
         }
 
         composable("avaliacao") {
@@ -72,22 +77,32 @@ fun NavGraph(
             arguments = listOf(navArgument("mood") { type = NavType.StringType })
         ) { backStackEntry ->
             val mood = backStackEntry.arguments?.getString("mood") ?: "neutro"
-            AnaliseSintomasScreen(navController, mood, humorRepository)
+            AnaliseSintomasScreen(navController, mood, humorRepository, authRepository)
         }
 
-        composable("afirmacoes/{mood}") { backStackEntry ->
+        composable(
+            route = "afirmacoes/{mood}",
+            arguments = listOf(navArgument("mood") { type = NavType.StringType })
+        ) { backStackEntry ->
+
             val mood = backStackEntry.arguments?.getString("mood") ?: "neutro"
-            AfirmacoesScreen(navController, mood, humorRepository)
+
+            // Passamos o authRepository para o screen
+            AfirmacoesScreen(
+                navController = navController,
+                mood = mood,
+                repository = humorRepository,
+                authRepository = authRepository // necessário para buscar o token dentro do composable
+            )
         }
+
 
         composable("videos") {
             VideosScreen(navController)
         }
 
-        // Removi a rota "sons" pois SonsScreen não foi fornecida
-        // Se você tiver essa tela, adicione aqui:
-        // composable("sons") {
-        //     SonsScreen(navController)
-        // }
+        composable("sons") {
+            SonsScreen(navController)
+        }
     }
 }
