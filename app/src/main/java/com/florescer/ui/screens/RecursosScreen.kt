@@ -19,9 +19,13 @@ import androidx.navigation.NavHostController
 import com.florescer.R
 import com.florescer.data.HumorRepository
 import com.florescer.ui.theme.*
+import kotlinx.coroutines.launch
 
 @Composable
-fun RecursosScreen(navController: NavHostController, humorRepository: HumorRepository) {
+fun RecursosScreen(
+    navController: NavHostController,
+    humorRepository: HumorRepository
+) {
     val gradient = Brush.verticalGradient(colors = listOf(GradienteTop, GradienteBottom))
     val context = LocalContext.current
 
@@ -31,17 +35,41 @@ fun RecursosScreen(navController: NavHostController, humorRepository: HumorRepos
     }
 
     val scope = rememberCoroutineScope()
-    val syncMessage = remember { mutableStateOf("") }
+    var syncMessage by remember { mutableStateOf("") }
+    var isSyncing by remember { mutableStateOf(false) }
 
-    LaunchedEffect(Unit) {
-        try {
-            val humores = humorRepository.getHumoresLocais()
-            humores.forEach { humor ->
-                humorRepository.sendHumorToBackend(humor, "null")
+    // BOTÃO MANUAL DE SINCRONIZAÇÃO
+    fun sincronizarDados() {
+        isSyncing = true
+        syncMessage = "⏳ Sincronizando..."
+
+        scope.launch {
+            try {
+                val humores = humorRepository.getHumoresLocais()
+                var sucessos = 0
+                var falhas = 0
+
+                humores.forEach { humor ->
+                    try {
+                        humorRepository.sendHumorToBackend(humor)
+                        sucessos++
+                    } catch (e: Exception) {
+                        falhas++
+                        e.printStackTrace()
+                    }
+                }
+
+                syncMessage = if (falhas == 0) {
+                    "✅ $sucessos registros sincronizados!"
+                } else {
+                    "⚠️ $sucessos enviados, $falhas falharam"
+                }
+            } catch (e: Exception) {
+                syncMessage = "❌ Erro ao sincronizar dados"
+                e.printStackTrace()
+            } finally {
+                isSyncing = false
             }
-            syncMessage.value = "✅ Dados sincronizados com sucesso!"
-        } catch (e: Exception) {
-            syncMessage.value = "❌ Erro ao sincronizar dados"
         }
     }
 
@@ -65,13 +93,42 @@ fun RecursosScreen(navController: NavHostController, humorRepository: HumorRepos
                 contentScale = ContentScale.Fit
             )
 
-            if (syncMessage.value.isNotEmpty()) {
-                Text(
-                    syncMessage.value,
-                    color = if (syncMessage.value.startsWith("✅")) Color.Green else Color.Red,
-                    fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Center
-                )
+            if (syncMessage.isNotEmpty()) {
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = when {
+                            syncMessage.startsWith("✅") -> Color.Green.copy(alpha = 0.2f)
+                            syncMessage.startsWith("❌") -> Color.Red.copy(alpha = 0.2f)
+                            else -> Color.Gray.copy(alpha = 0.2f)
+                        }
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        syncMessage,
+                        modifier = Modifier.padding(12.dp),
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+
+            Button(
+                onClick = { sincronizarDados() },
+                enabled = !isSyncing,
+                colors = ButtonDefaults.buttonColors(containerColor = RosaTexto),
+                shape = RoundedCornerShape(30),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                if (isSyncing) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(16.dp),
+                        color = Branco,
+                        strokeWidth = 2.dp
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                Text("Sincronizar Dados", color = Branco, fontSize = 16.sp)
             }
 
             Card(
@@ -160,8 +217,7 @@ fun RecursosScreen(navController: NavHostController, humorRepository: HumorRepos
             }
 
             Card(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFFFE0E0)),
                 shape = RoundedCornerShape(16.dp)
             ) {
@@ -189,7 +245,7 @@ fun RecursosScreen(navController: NavHostController, humorRepository: HumorRepos
             }
 
             Button(
-                onClick = { navController.navigate("trilhas/feliz") }, // ou outro `mood` default
+                onClick = { navController.navigate("trilhas/neutro") },
                 colors = ButtonDefaults.buttonColors(containerColor = RosaEscuro),
                 shape = RoundedCornerShape(30),
                 modifier = Modifier.fillMaxWidth()

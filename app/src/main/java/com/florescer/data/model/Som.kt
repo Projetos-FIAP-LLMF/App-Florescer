@@ -1,7 +1,9 @@
 package com.florescer.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Som(
     val id: String,
-    val nome: String,
+    @SerializedName("title") val nome: String,
     val url: String
 )

@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.florescer.data.HumorDao
-import com.florescer.data.TokenDao
 
-@Database(entities = [HumorEntry::class, TokenEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [HumorEntry::class, TokenEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun humorDao(): HumorDao
     abstract fun tokenDao(): TokenDao
@@ -22,11 +24,12 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "florescer_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }
         }
     }
 }
-

@@ -11,7 +11,7 @@ interface HumorApi {
 
     @POST("checkin")
     suspend fun postHumor(
-        @Header("X-User-Id") userId: String,
+        @Header("X-User-Id") userId: String, // device_12345 (local)
         @Body humor: HumorDTO
     ): HumorDTO
 }

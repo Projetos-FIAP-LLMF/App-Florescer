@@ -8,7 +8,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.florescer.ui.screens.*
-import com.florescer.ui.auth.AuthScreen
 import com.florescer.data.AuthRepository
 import com.florescer.data.HumorRepository
 import com.florescer.ui.auth.AuthViewModel
@@ -22,26 +21,9 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "auth"
+        startDestination = "home"
     ) {
-        // Tela de autenticação
-        composable("auth") {
-            AuthScreen(
-                authRepository = authRepository,
-                onTokenObtido = { userId ->
-                    navController.navigate("home/$userId") {
-                        popUpTo("auth") { inclusive = true }
-                    }
-                }
-            )
-        }
-
-        // Home recebe userId na rota
-        composable(
-            route = "home/{userId}",
-            arguments = listOf(navArgument("userId") { type = NavType.StringType })
-        ) { backStackEntry ->
-            val userId = backStackEntry.arguments?.getString("userId") ?: ""
+        composable("home") {
             val authViewModel: AuthViewModel = viewModel(
                 factory = AuthViewModelFactory(authRepository)
             )
@@ -57,7 +39,7 @@ fun NavGraph(
         }
 
         composable("evolucao") {
-            EvolucaoScreen(navController, humorRepository, authRepository)
+            EvolucaoScreen(navController, humorRepository)
         }
 
         composable("avaliacao") {
@@ -68,7 +50,7 @@ fun NavGraph(
             route = "trilhas/{mood}",
             arguments = listOf(navArgument("mood") { type = NavType.StringType })
         ) { backStackEntry ->
-            val mood = backStackEntry.arguments?.getString("mood") ?: "feliz"
+            val mood = backStackEntry.arguments?.getString("mood") ?: "neutro"
             TrilhasScreen(navController, mood = mood)
         }
 
@@ -77,25 +59,16 @@ fun NavGraph(
             arguments = listOf(navArgument("mood") { type = NavType.StringType })
         ) { backStackEntry ->
             val mood = backStackEntry.arguments?.getString("mood") ?: "neutro"
-            AnaliseSintomasScreen(navController, mood, humorRepository, authRepository)
+            AnaliseSintomasScreen(navController, mood, humorRepository)
         }
 
         composable(
             route = "afirmacoes/{mood}",
             arguments = listOf(navArgument("mood") { type = NavType.StringType })
         ) { backStackEntry ->
-
             val mood = backStackEntry.arguments?.getString("mood") ?: "neutro"
-
-            // Passamos o authRepository para o screen
-            AfirmacoesScreen(
-                navController = navController,
-                mood = mood,
-                repository = humorRepository,
-                authRepository = authRepository // necessário para buscar o token dentro do composable
-            )
+            AfirmacoesScreen(navController, mood, humorRepository)
         }
-
 
         composable("videos") {
             VideosScreen(navController)

@@ -1,29 +1,73 @@
 package com.florescer.data
 
 import com.florescer.data.network.AuthApi
-import com.florescer.data.TokenDao
-
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import java.util.UUID
 
 class AuthRepository(
     private val api: AuthApi,
     private val tokenDao: TokenDao
 ) {
-    suspend fun getUserId(): String {
+    private val tokenMutex = Mutex()
+    private var cachedToken: String? = null
+
+
+    suspend fun getUserId(): String = tokenMutex.withLock {
+
+        cachedToken?.let {
+            return it
+        }
+
+
         val storedToken = tokenDao.getToken()
-        return storedToken?.token ?: "default-user-id"
+        if (storedToken != null) {
+            cachedToken = storedToken.token
+            return storedToken.token
+        }
+
+        val newToken = generateDeviceId()
+        saveTokenLocal(newToken)
+        cachedToken = newToken
+
+        return newToken
     }
 
-    private fun saveToken(token: String) {
+    private fun generateDeviceId(): String {
+        return "device_${UUID.randomUUID()}"
+    }
 
+    private suspend fun saveTokenLocal(token: String) {
+        val tokenEntity = TokenEntity(
+            id = 1,
+            token = token,
+            createdAt = System.currentTimeMillis()
+        )
+        tokenDao.insertToken(tokenEntity)
     }
 
     suspend fun hasToken(): Boolean {
-        return false
+        return tokenDao.getToken() != null
     }
 
     suspend fun getStoredToken(): String? {
-        // aqui você busca no banco ou retorna null/default
-        val storedTokenEntity = tokenDao.getToken() // supondo que você tenha essa função
-        return storedTokenEntity?.token
+        return tokenDao.getToken()?.token
+    }
+
+    suspend fun clearToken() {
+        tokenMutex.withLock {
+            tokenDao.clearToken()
+            cachedToken = null
+        }
+    }
+
+    suspend fun registerDeviceInBackend(): Boolean {
+        return try {
+            val deviceId = getUserId()
+
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 }

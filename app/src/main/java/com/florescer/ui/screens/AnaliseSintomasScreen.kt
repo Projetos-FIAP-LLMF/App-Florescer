@@ -19,20 +19,16 @@ import coil.decode.GifDecoder
 import coil.request.ImageRequest
 import com.florescer.R
 import com.florescer.data.HumorRepository
-import com.florescer.data.model.Humor
 import com.florescer.data.model.Recomendacao
-import com.florescer.data.model.SintomasEntry
 import com.florescer.ui.theme.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import com.florescer.data.AuthRepository
+
 
 @Composable
 fun AnaliseSintomasScreen(
     navController: NavHostController,
     mood: String,
-    repository: HumorRepository,
-    authRepository : AuthRepository
+    repository: HumorRepository
+
 ) {
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
@@ -47,25 +43,20 @@ fun AnaliseSintomasScreen(
         "amoroso" -> R.drawable.love
         else -> R.drawable.neutral
     }
-    var token by remember { mutableStateOf<String?>(null) }
+
     var recomendacoes by remember { mutableStateOf<List<Recomendacao>>(emptyList()) }
-    var isLoading by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(true) }
     var error by remember { mutableStateOf<String?>(null) }
 
-    LaunchedEffect(Unit) {
-        token = authRepository.getStoredToken() ?: "default-token"
-    }
 
-    LaunchedEffect(token,mood) {
-        if (token == null) return@LaunchedEffect
+    LaunchedEffect(mood) {
         isLoading = true
         error = null
         try {
-            recomendacoes = withContext(Dispatchers.IO) {
-                repository.getRecomendacoes(userId = token!!, limit = 5)
-            }
+            recomendacoes = repository.getRecomendacoes(limit = 5)
         } catch (e: Exception) {
             error = e.message ?: "Erro desconhecido"
+            e.printStackTrace()
         } finally {
             isLoading = false
         }
@@ -87,7 +78,7 @@ fun AnaliseSintomasScreen(
                     .data(moodGif)
                     .decoderFactory(GifDecoder.Factory())
                     .build(),
-                contentDescription = "Seu humor do dia em gif de gatinho",
+                contentDescription = "Seu humor do dia",
                 modifier = Modifier.size(200.dp)
             )
 
@@ -99,27 +90,35 @@ fun AnaliseSintomasScreen(
                 textAlign = TextAlign.Center
             )
 
-            if (isLoading) {
-                CircularProgressIndicator(color = RosaTexto)
-            } else if (error != null) {
-                Text(error ?: "Erro", color = RosaTexto)
-            } else {
-                Text(
-                    "Recomendações:",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Preto,
-                    textAlign = TextAlign.Center
-                )
+            when {
+                isLoading -> {
+                    CircularProgressIndicator(color = RosaTexto)
+                }
+                error != null -> {
+                    Text(
+                        text = error!!,
+                        color = RosaTexto,
+                        textAlign = TextAlign.Center
+                    )
+                }
+                else -> {
+                    Text(
+                        "Recomendações:",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Preto,
+                        textAlign = TextAlign.Center
+                    )
 
-                recomendacoes.forEach { recomendacao ->
-                    recomendacao.descricao?.let {
-                        Text(
-                            it,
-                            fontSize = 14.sp,
-                            color = Preto,
-                            textAlign = TextAlign.Start
-                        )
+                    recomendacoes.forEach { recomendacao ->
+                        recomendacao.descricao?.let {
+                            Text(
+                                it,
+                                fontSize = 14.sp,
+                                color = Preto,
+                                textAlign = TextAlign.Start
+                            )
+                        }
                     }
                 }
             }

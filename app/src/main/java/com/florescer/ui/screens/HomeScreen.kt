@@ -27,11 +27,17 @@ fun HomeScreen(
     authViewModel: AuthViewModel
 ) {
     val uiState by authViewModel.uiState.collectAsState()
-
-    // Gradiente de fundo
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
     )
+
+    LaunchedEffect(uiState) {
+        if (uiState is AuthUiState.Sucesso) {
+            navController.navigate("mood") {
+                popUpTo("home") { inclusive = true }
+            }
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -70,38 +76,72 @@ fun HomeScreen(
                 textAlign = TextAlign.Center
             )
 
-            when (uiState) {
-                is AuthUiState.Carregando -> CircularProgressIndicator()
 
-                is AuthUiState.Idle,
-                is AuthUiState.Erro -> {
-                    Button(
-                        onClick = { authViewModel.onComecarClicked() },
-                        colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
-                        shape = RoundedCornerShape(30),
-                        modifier = Modifier.fillMaxWidth()
+            when (val state = uiState) {
+                is AuthUiState.Idle -> {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        Text("Começar", color = Branco, fontSize = 20.sp)
+                        Button(
+                            onClick = { authViewModel.onComecarClicked() },
+                            colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
+                            shape = RoundedCornerShape(30),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("Começar", color = Branco, fontSize = 20.sp)
+                        }
+                    }
+                }
+
+                is AuthUiState.Carregando -> {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        CircularProgressIndicator(color = RosaTexto)
+                        Text(
+                            text = "Gerando token...",
+                            color = RosaTexto,
+                            fontSize = 14.sp
+                        )
                     }
                 }
 
                 is AuthUiState.Sucesso -> {
-                    // já navega quando tiver sucesso
-                    LaunchedEffect(Unit) {
-                        navController.navigate("mood") {
-                            popUpTo("home") { inclusive = true }
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        CircularProgressIndicator(color = RosaTexto)
+                        Text(
+                            text = "Redirecionando...",
+                            color = RosaTexto,
+                            fontSize = 14.sp
+                        )
+                    }
+                }
+
+                is AuthUiState.Erro -> {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        Text(
+                            text = "Erro: ${state.mensagem}",
+                            color = MaterialTheme.colorScheme.error,
+                            textAlign = TextAlign.Center
+                        )
+                        Button(
+                            onClick = { authViewModel.onComecarClicked() },
+                            colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
+                            shape = RoundedCornerShape(30),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("Tentar Novamente", color = Branco, fontSize = 18.sp)
                         }
                     }
                 }
-            }
-
-            if (uiState is AuthUiState.Erro) {
-                Text(
-                    text = (uiState as AuthUiState.Erro).mensagem,
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.error,
-                    textAlign = TextAlign.Center
-                )
             }
 
             Text(
@@ -113,5 +153,3 @@ fun HomeScreen(
         }
     }
 }
-
-

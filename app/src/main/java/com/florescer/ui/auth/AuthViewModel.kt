@@ -23,7 +23,7 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
         viewModelScope.launch {
             _uiState.value = AuthUiState.Carregando
             try {
-                val userId = authRepository.getUserId() // só pega o userId
+                val userId = authRepository.getUserId()
                 _uiState.value = AuthUiState.Sucesso(userId)
             } catch (e: Exception) {
                 _uiState.value = AuthUiState.Erro(e.message ?: "Erro desconhecido")

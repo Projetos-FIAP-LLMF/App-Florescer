@@ -52,6 +52,8 @@ fun MoodScreen(
     var heartRate by remember { mutableStateOf(TextFieldValue("")) }
     var diaRegistrado by remember { mutableStateOf(false) }
     var mostrarDialog by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
 
     val symptoms = listOf("Cansaço", "Fadiga", "Dor de cabeça", "Dores musculares", "Insônia")
     val selectedSymptoms = remember { mutableStateListOf<String>() }
@@ -96,7 +98,10 @@ fun MoodScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 moodsImages.forEachIndexed { index, moodRes ->
-                    IconButton(onClick = { selectedMood = index }) {
+                    IconButton(
+                        onClick = { selectedMood = index },
+                        enabled = !isLoading
+                    ) {
                         Icon(
                             painter = painterResource(id = moodRes),
                             contentDescription = "Humor ${moodsText[index]}",
@@ -112,7 +117,8 @@ fun MoodScreen(
                 onValueChange = { desabafo = it },
                 label = { Text("Quer desabafar?") },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(16.dp),
+                enabled = !isLoading
             )
 
             OutlinedTextField(
@@ -120,7 +126,8 @@ fun MoodScreen(
                 onValueChange = { heartRate = it },
                 label = { Text("Batimentos cardíacos (opcional)") },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(16.dp),
+                enabled = !isLoading
             )
 
             Text(
@@ -145,18 +152,38 @@ fun MoodScreen(
                                 if (it) selectedSymptoms.add(symptom)
                                 else selectedSymptoms.remove(symptom)
                             },
-                            colors = CheckboxDefaults.colors(checkedColor = RosaBotao)
+                            colors = CheckboxDefaults.colors(checkedColor = RosaBotao),
+                            enabled = !isLoading
                         )
                         Text(text = symptom, color = RosaTexto)
                     }
                 }
             }
 
+            errorMessage?.let { error ->
+                Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor =  GradienteBottom
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = error,
+                        color = RosaEscuro,
+                        modifier = Modifier.padding(12.dp),
+                        fontSize = 14.sp
+                    )
+                }
+            }
+
             Button(
                 onClick = {
-                    if (selectedMood != null) {
+                    selectedMood?.let { moodIndex ->
+                        isLoading = true
+                        errorMessage = null
+
                         val humor = HumorEntry(
-                            mood = moodsText[selectedMood!!],
+                            mood = moodsText[moodIndex],
                             symptoms = selectedSymptoms.joinToString(", "),
                             heartRate = heartRate.text,
                             comment = desabafo.text,
@@ -165,27 +192,55 @@ fun MoodScreen(
 
                         coroutineScope.launch {
                             try {
+                                // Salvar localmente
                                 humorRepository.saveHumorLocal(humor)
-                                humorRepository.sendHumorToBackend(humor, "null")
+
+                                // Enviar ao backend (userId automático)
+                                try {
+                                    humorRepository.sendHumorToBackend(humor)
+                                } catch (e: Exception) {
+                                    // Salvo localmente, sincroniza depois
+                                    e.printStackTrace()
+                                }
+
                                 mostrarDialog = true
                                 diaRegistrado = true
                             } catch (e: Exception) {
+                                errorMessage = "Erro ao registrar: ${e.message}"
                                 e.printStackTrace()
+                            } finally {
+                                isLoading = false
                             }
                         }
                     }
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
                 shape = RoundedCornerShape(30),
-                enabled = selectedMood != null,
+                enabled = selectedMood != null && !isLoading,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Registrar Meu Dia", color = Branco, fontSize = 18.sp)
+                if (isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(20.dp),
+                        color = Branco,
+                        strokeWidth = 2.dp
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+                Text(
+                    text = if (isLoading) "Registrando..." else "Registrar Meu Dia",
+                    color = Branco,
+                    fontSize = 18.sp
+                )
             }
 
             if (diaRegistrado) {
                 Button(
-                    onClick = { navController.navigate("analiseSintomas/${selectedMood}") },
+                    onClick = {
+                        selectedMood?.let {
+                            navController.navigate("analiseSintomas/$it")
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
                     shape = RoundedCornerShape(30),
                     modifier = Modifier.fillMaxWidth()

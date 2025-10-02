@@ -43,22 +43,21 @@ fun emojiDoHumor(valor: Number): String {
     }
 }
 @Composable
-fun EvolucaoScreen(navController: NavHostController, humorRepository: HumorRepository, authRepository : AuthRepository) {
+fun EvolucaoScreen(
+    navController: NavHostController,
+    humorRepository: HumorRepository
+) {
     val gradient = Brush.verticalGradient(
         colors = listOf(GradienteTop, GradienteBottom)
     )
 
-    var token by remember { mutableStateOf<String?>(null) }
 
-    LaunchedEffect(Unit) {
-        token = authRepository.getStoredToken() ?: "default-token"
-    }
     val evolucao by produceState<List<EvolucaoHistorico>>(
         initialValue = emptyList(),
         humorRepository
     ) {
         value = try {
-            humorRepository.getHistoricoEvolucao(userId = token!!, dateTo = null, dateFrom = null, limit = null)
+            humorRepository.getHistoricoEvolucao()
         } catch (e: Exception) {
             e.printStackTrace()
             emptyList()
@@ -97,7 +96,18 @@ fun EvolucaoScreen(navController: NavHostController, humorRepository: HumorRepos
             .padding(horizontal = 24.dp, vertical = 16.dp)
     ) {
         if (evolucao.isEmpty()) {
-            CircularProgressIndicator(color = RosaTexto)
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CircularProgressIndicator(color = RosaTexto)
+                Text(
+                    text = "Carregando histórico...",
+                    color = RosaTexto,
+                    modifier = Modifier.padding(top = 16.dp)
+                )
+            }
         } else {
             Column(
                 modifier = Modifier
@@ -207,7 +217,7 @@ fun EvolucaoScreen(navController: NavHostController, humorRepository: HumorRepos
                 }
 
                 Button(
-                    onClick = { navController.navigate("trilhas/{mood}") },
+                    onClick = { navController.navigate("trilhas/neutro") },
                     colors = ButtonDefaults.buttonColors(containerColor = RosaEscuro),
                     shape = RoundedCornerShape(30),
                     modifier = Modifier.fillMaxWidth()
@@ -218,3 +228,4 @@ fun EvolucaoScreen(navController: NavHostController, humorRepository: HumorRepos
         }
     }
 }
+

@@ -4,16 +4,15 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.florescer.data.TokenEntity
 
 @Dao
 interface TokenDao {
+    @Query("SELECT * FROM tokens WHERE id = 1 LIMIT 1")
+    suspend fun getToken(): TokenEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertToken(token: TokenEntity)
 
-    @Query("SELECT * FROM token_table WHERE id = 0 LIMIT 1")
-    suspend fun getToken(): TokenEntity?
-
-    @Query("DELETE FROM token_table")
-    suspend fun deleteAll()
+    @Query("DELETE FROM tokens")
+    suspend fun clearToken()
 }

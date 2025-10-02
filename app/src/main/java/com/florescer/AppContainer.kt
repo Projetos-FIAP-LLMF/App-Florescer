@@ -6,18 +6,14 @@ import com.florescer.data.network.*
 
 class AppContainer(context: Context) {
 
-    // -------------------------
-    // Database (Room)
-    // -------------------------
+
     private val database: AppDatabase = AppDatabase.getInstance(context)
 
-    // DAOs
+
     private val humorDao = database.humorDao()
     private val tokenDao = database.tokenDao()
 
-    // -------------------------
-    // APIs (via RetrofitInstance)
-    // -------------------------
+
     private val humorApi = RetrofitInstance.api
     private val afirmacoesApi = RetrofitInstance.afirmacoesApi
     private val analiseSintomasApi = RetrofitInstance.analiseSintomasApi
@@ -29,9 +25,13 @@ class AppContainer(context: Context) {
     private val sonsApi = RetrofitInstance.sonsApi
     private val authApi = RetrofitInstance.authApi
 
-    // -------------------------
-    // Repositories
-    // -------------------------
+
+    val authRepository = AuthRepository(
+        api = authApi,
+        tokenDao = tokenDao
+    )
+
+
     val humorRepository = HumorRepository(
         humorApi = humorApi,
         afirmacoesApi = afirmacoesApi,
@@ -42,11 +42,7 @@ class AppContainer(context: Context) {
         trilhasApi = trilhasApi,
         videosApi = videosApi,
         sonsApi = sonsApi,
-        dao = humorDao
-    )
-
-    val authRepository = AuthRepository(
-        api = authApi,
-        tokenDao = tokenDao,
+        dao = humorDao,
+        authRepository = authRepository
     )
 }
