@@ -65,7 +65,14 @@ class AuthRepository(
         return try {
             val deviceId = getUserId()
 
-            true
+            val response = api.registerDevice(TokenEntity(
+                id = 1,
+                token = deviceId,
+                createdAt = System.currentTimeMillis()
+            ))
+
+            val successful = response.isSuccessful
+            successful
         } catch (e: Exception) {
             false
         }
