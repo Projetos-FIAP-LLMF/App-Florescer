@@ -3,6 +3,7 @@ package com.florescer
 import android.content.Context
 import com.florescer.data.*
 import com.florescer.data.network.*
+import kotlinx.coroutines.runBlocking
 
 class AppContainer(context: Context) {
 
@@ -31,7 +32,15 @@ class AppContainer(context: Context) {
         tokenDao = tokenDao
     )
 
+    init {
 
+        RetrofitInstance.setTokenProvider {
+
+            runBlocking {
+                authRepository.getAuthToken()
+            }
+        }
+    }
     val humorRepository = HumorRepository(
         humorApi = humorApi,
         afirmacoesApi = afirmacoesApi,

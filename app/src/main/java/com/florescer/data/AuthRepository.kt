@@ -11,25 +11,28 @@ class AuthRepository(
 ) {
     private val tokenMutex = Mutex()
     private var cachedToken: String? = null
+    private var cachedAuthToken: String? = null
 
 
+    suspend fun getAuthToken(): String? {
+        return cachedAuthToken
+    }
+
+    suspend fun setAuthToken(token: String) {
+        cachedAuthToken = token
+    }
+
+    // ID do dispositivo (já existente)
     suspend fun getUserId(): String = tokenMutex.withLock {
-
-        cachedToken?.let {
-            return it
-        }
-
-
+        cachedToken?.let { return it }
         val storedToken = tokenDao.getToken()
         if (storedToken != null) {
             cachedToken = storedToken.token
             return storedToken.token
         }
-
         val newToken = generateDeviceId()
         saveTokenLocal(newToken)
         cachedToken = newToken
-
         return newToken
     }
 
