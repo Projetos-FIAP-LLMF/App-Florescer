@@ -14,6 +14,8 @@ class AuthInterceptor(
         tokenProvider()?.let { token ->
             if (token.isNotBlank()) {
                 requestBuilder.addHeader("Authorization", "Bearer $token")
+                requestBuilder.addHeader("X-User-Id", "1234")
+
                 println("🔐 [AUTH] Adicionando Bearer Token: ${token.take(10)}...")
             }
         }
