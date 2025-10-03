@@ -31,6 +31,7 @@ fun HomeScreen(
         colors = listOf(GradienteTop, GradienteBottom)
     )
 
+    // quando gerar token com sucesso, navega
     LaunchedEffect(uiState) {
         if (uiState is AuthUiState.Sucesso) {
             navController.navigate("mood") {
@@ -76,7 +77,7 @@ fun HomeScreen(
                 textAlign = TextAlign.Center
             )
 
-
+            // renderização de acordo com o estado do auth
             when (val state = uiState) {
                 is AuthUiState.Idle -> {
                     Column(

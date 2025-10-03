@@ -24,6 +24,7 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
             _uiState.value = AuthUiState.Carregando
             try {
                 val userId = authRepository.getUserId()
+                authRepository.registerDeviceInBackend()
                 _uiState.value = AuthUiState.Sucesso(userId)
             } catch (e: Exception) {
                 _uiState.value = AuthUiState.Erro(e.message ?: "Erro desconhecido")
