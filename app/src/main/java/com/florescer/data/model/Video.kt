@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class Video(
     val id: String,
-    @SerializedName("title") val titulo: String,
+    @SerializedName("title") val title: String,
     val url: String
 )

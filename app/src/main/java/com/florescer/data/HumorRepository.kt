@@ -17,7 +17,6 @@ class HumorRepository(
     private val authRepository: AuthRepository
 ) {
 
-
     suspend fun saveHumorLocal(humor: HumorEntry) = dao.insert(humor)
     suspend fun getHumoresLocais(): List<HumorEntry> = dao.getAll()
 
@@ -240,7 +239,7 @@ class HumorRepository(
         return listOf(
             Video(
                 id = "1",
-                titulo = "Meditação Guiada para Iniciantes",
+                title = "Meditação Guiada para Iniciantes",
                 url = "https://www.youtube.com/embed/inpok4MKVLM"
             )
         )

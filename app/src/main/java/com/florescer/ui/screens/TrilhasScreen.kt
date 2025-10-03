@@ -27,8 +27,8 @@ fun TrilhasScreen(navController: NavHostController, mood: String) {
 
     val trilhas = listOf(
         TrilhaItem("✨ Afirmações", "afirmacoes/$mood", "Frases curtas para elevar seu dia."),
-        TrilhaItem("🎥 Vídeos Relaxantes", "videos", "Clipes suaves para acalmar corpo e mente."),
-        TrilhaItem("🎶 Sons de Meditação", "sons", "Áudios leves para respirar e desacelerar.")
+        TrilhaItem("🎥 Vídeos Relaxantes", "videos/$mood", "Clipes suaves para acalmar corpo e mente."),
+        TrilhaItem("🎶 Sons de Meditação", "sons/$mood", "Áudios leves para respirar e desacelerar.")
     )
 
     Column(
@@ -240,6 +240,6 @@ private fun moodUi(mood: String): Triple<String, Color, String> {
         "enjoado" -> Triple("🤢", Color(0xFF66BB6A), "Indisposto(a)")
         "amoroso" -> Triple("💖", Color(0xFFFF80AB), "Amoroso(a)")
         "neutro" -> Triple("😐", Color(0xFF9E9E9E), "Neutro")
-        else -> Triple("🌿", Color(0xFF9E9E9E), mood.replaceFirstChar { it.uppercase() })
+        else -> Triple("🌿", Color(0xFF9E9E9E), "")
     }
 }

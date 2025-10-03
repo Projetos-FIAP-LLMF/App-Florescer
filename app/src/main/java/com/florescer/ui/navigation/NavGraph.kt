@@ -1,5 +1,7 @@
 package com.florescer.ui.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -13,6 +15,7 @@ import com.florescer.data.HumorRepository
 import com.florescer.ui.auth.AuthViewModel
 import com.florescer.ui.auth.AuthViewModelFactory
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavGraph(
     navController: NavHostController,
@@ -70,12 +73,21 @@ fun NavGraph(
             AfirmacoesScreen(navController, mood, humorRepository)
         }
 
-        composable("videos") {
-            VideosScreen(navController)
+        composable(
+            route = "videos/{mood}",
+            arguments = listOf(navArgument("mood") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val mood = backStackEntry.arguments?.getString("mood") ?: "neutro"
+            VideosScreen(navController, mood, humorRepository)
         }
 
-        composable("sons") {
-            SonsScreen(navController)
+
+        composable(
+            route = "sons/{mood}",
+            arguments = listOf(navArgument("mood") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val mood = backStackEntry.arguments?.getString("mood") ?: "neutro"
+            SonsScreen(navController, humorRepository, mood)
         }
     }
 }

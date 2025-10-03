@@ -233,7 +233,7 @@ fun AnaliseSintomasScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                "Ver Trilha de Bem-Estar",
+                "Trilha de Bem-Estar",
                 color = Branco,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold
@@ -250,7 +250,7 @@ fun AnaliseSintomasScreen(
             colors = ButtonDefaults.outlinedButtonColors(contentColor = RosaBotao)
         ) {
             Text(
-                "Fazer Minha Autoavaliação",
+                "Realizar avaliaçao",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold
             )
@@ -303,7 +303,7 @@ private fun RecommendationCard(
                 .padding(horizontal = 14.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            NumberBadge(number = index)
+            NumberBadge(number = index, accent = accent)
             Spacer(Modifier.width(12.dp))
             Text(
                 text = text,
@@ -316,9 +316,9 @@ private fun RecommendationCard(
 }
 
 @Composable
-private fun NumberBadge(number: Int) {
+private fun NumberBadge(number: Int,  accent: Color = RosaTexto) {
     Surface(
-        color = RosaBotao, // fixo rosa 💗
+        color = accent,
         shape = RoundedCornerShape(50),
         tonalElevation = 0.dp
     ) {
@@ -335,7 +335,6 @@ private fun NumberBadge(number: Int) {
         }
     }
 }
-
 
 @Composable
 private fun ErrorCard(message: String) {
