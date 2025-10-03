@@ -25,17 +25,29 @@ import com.florescer.data.model.EvolucaoHistorico
 import com.florescer.ui.theme.*
 import kotlinx.coroutines.launch
 
-fun corDoHumorTexto(humor: String) = when (humor.lowercase()) {
-    "amoroso" -> Color(0xFFFFC1E3)
-    "feliz" -> Color(0xFFFFEB3B)
-    "neutro" -> Color(0xFF9E9E9E)
-    "triste" -> Color(0xFF2196F3)
-    "bravo" -> Color(0xFFF44336)
+// mapeia string -> cor
+fun corDoHumorTexto(humor: String) = when (humor.uppercase()) {
+    "AMOROSO" -> Color(0xFFFFC1E3)
+    "FELIZ" -> Color(0xFFFFEB3B)
+    "NEUTRO" -> Color(0xFF9E9E9E)
+    "TRISTE" -> Color(0xFF2196F3)
+    "BRAVO" -> Color(0xFFF44336)
     else -> Color.Gray
 }
 
-fun emojiDoHumor(valor: Number): String {
-    val num = valor.toDouble()
+// mapeia string -> score (1..5)
+fun scoreDoHumor(humor: String) = when (humor.uppercase()) {
+    "AMOROSO" -> 5
+    "FELIZ" -> 4
+    "NEUTRO" -> 3
+    "TRISTE" -> 2
+    "BRAVO" -> 1
+    else -> 0
+}
+
+// mapeia score -> emoji
+fun emojiDoHumor(score: Number): String {
+    val num = score.toDouble()
     return when {
         num >= 4.5 -> "😄"
         num >= 3.5 -> "🙂"
@@ -47,7 +59,8 @@ fun emojiDoHumor(valor: Number): String {
 
 @Composable
 fun EvolucaoScreen(
-    navController: NavHostController, humorRepository: HumorRepository
+    navController: NavHostController,
+    humorRepository: HumorRepository
 ) {
     val gradient = Brush.verticalGradient(colors = listOf(GradienteTop, GradienteBottom))
 
@@ -72,20 +85,8 @@ fun EvolucaoScreen(
 
     LaunchedEffect(Unit) { loadData() }
 
-    val dias = evolucao.map { it.data.takeLast(2).ifBlank { it.data } }
-    val humores = evolucao.map { it.humor }
-
-    val humorNumerico = humores.map {
-        when (it.lowercase()) {
-            "amoroso" -> 5
-            "feliz" -> 4
-            "neutro" -> 3
-            "triste" -> 2
-            "bravo" -> 1
-            else -> 0
-        }
-    }.filter { it > 0 }
-
+    // converte para scores
+    val humorNumerico = evolucao.map { scoreDoHumor(it.humor) }.filter { it > 0 }
     val maiorHumor = humorNumerico.maxOrNull() ?: 0
     val menorHumor = humorNumerico.minOrNull() ?: 0
     val mediaHumor = if (humorNumerico.isNotEmpty()) humorNumerico.average() else 0.0
@@ -126,17 +127,13 @@ fun EvolucaoScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
-                        text = error!!, color = RosaTexto, textAlign = TextAlign.Center
-                    )
+                    Text(text = error!!, color = RosaTexto, textAlign = TextAlign.Center)
                     Spacer(Modifier.height(16.dp))
                     Button(
                         onClick = { scope.launch { loadData() } },
                         colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
                         shape = RoundedCornerShape(30)
-                    ) {
-                        Text("Tentar novamente", color = Branco)
-                    }
+                    ) { Text("Tentar novamente", color = Branco) }
                 }
             }
 
@@ -147,14 +144,14 @@ fun EvolucaoScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Sem registros ainda",
+                        "Sem registros ainda",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = RosaTexto
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = "Faça seu primeiro check-in para acompanhar sua evolução 💖",
+                        "Faça seu primeiro check-in para acompanhar sua evolução 💖",
                         color = RosaTexto,
                         textAlign = TextAlign.Center
                     )
@@ -163,9 +160,7 @@ fun EvolucaoScreen(
                         onClick = { navController.popBackStack() },
                         colors = ButtonDefaults.buttonColors(containerColor = RosaBotao),
                         shape = RoundedCornerShape(30)
-                    ) {
-                        Text("Voltar", color = Branco)
-                    }
+                    ) { Text("Voltar", color = Branco) }
                 }
             }
 
@@ -187,13 +182,14 @@ fun EvolucaoScreen(
                     )
 
                     Text(
-                        text = "Humor da Semana",
+                        "Humor da Semana",
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
                         color = RosaTexto,
                         textAlign = TextAlign.Center
                     )
 
+                    // Barras de evolução
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
@@ -204,10 +200,10 @@ fun EvolucaoScreen(
                             modifier = Modifier.padding(24.dp),
                             verticalArrangement = Arrangement.spacedBy(16.dp)
                         ) {
-                            evolucao.forEachIndexed { index, item ->
+                            evolucao.forEach { item ->
                                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                     Text(
-                                        text = dias.getOrNull(index) ?: "Dia",
+                                        text = item.data.takeLast(2),
                                         fontSize = 16.sp,
                                         fontWeight = FontWeight.Medium,
                                         color = RosaTexto
@@ -223,16 +219,7 @@ fun EvolucaoScreen(
                                     ) {
                                         Box(
                                             modifier = Modifier
-                                                .fillMaxWidth(
-                                                    fraction = when (item.humor.lowercase()) {
-                                                        "amoroso" -> 1f
-                                                        "feliz" -> 0.8f
-                                                        "neutro" -> 0.6f
-                                                        "triste" -> 0.4f
-                                                        "bravo" -> 0.2f
-                                                        else -> 0.1f
-                                                    }
-                                                )
+                                                .fillMaxWidth(scoreDoHumor(item.humor) / 5f)
                                                 .height(14.dp)
                                                 .background(
                                                     corDoHumorTexto(item.humor),
@@ -240,13 +227,15 @@ fun EvolucaoScreen(
                                                 )
                                         )
                                     }
+                                    // mostra emoji junto
+                                    Text(emojiDoHumor(scoreDoHumor(item.humor)), fontSize = 18.sp)
                                 }
                             }
                         }
                     }
 
                     Text(
-                        text = fraseMotivacional,
+                        fraseMotivacional,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = RosaTexto,
@@ -280,9 +269,7 @@ fun EvolucaoScreen(
                         colors = ButtonDefaults.buttonColors(containerColor = RosaEscuro),
                         shape = RoundedCornerShape(30),
                         modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text("Voltar", color = Branco, fontSize = 18.sp)
-                    }
+                    ) { Text("Voltar", color = Branco, fontSize = 18.sp) }
                 }
             }
         }
