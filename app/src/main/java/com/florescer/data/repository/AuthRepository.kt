@@ -1,5 +1,7 @@
-package com.florescer.data
+package com.florescer.data.repository
 
+import com.florescer.data.local.dao.TokenDao
+import com.florescer.data.local.entity.TokenEntity
 import com.florescer.data.network.AuthApi
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock

@@ -17,7 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import androidx.navigation.NavHostController
 import com.florescer.R
-import com.florescer.data.HumorRepository
+import com.florescer.data.repository.HumorRepository
 import com.florescer.ui.theme.*
 import kotlinx.coroutines.launch
 

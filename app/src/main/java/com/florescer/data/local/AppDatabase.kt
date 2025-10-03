@@ -1,12 +1,16 @@
-package com.florescer.data
+package com.florescer.data.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.florescer.data.local.dao.HumorDao
+import com.florescer.data.local.entity.HumorEntity
+import com.florescer.data.local.dao.TokenDao
+import com.florescer.data.local.entity.TokenEntity
 
 @Database(
-    entities = [HumorEntry::class, TokenEntity::class],
+    entities = [HumorEntity::class, TokenEntity::class],
     version = 2,
     exportSchema = false
 )

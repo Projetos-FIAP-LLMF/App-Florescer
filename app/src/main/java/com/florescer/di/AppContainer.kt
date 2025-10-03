@@ -1,14 +1,16 @@
-package com.florescer
+package com.florescer.di
 
 import android.content.Context
-import com.florescer.data.*
-import com.florescer.data.network.*
+import com.florescer.data.local.AppDatabase
+import com.florescer.data.network.RetrofitInstance
+import com.florescer.data.repository.AuthRepository
+import com.florescer.data.repository.HumorRepository
 import kotlinx.coroutines.runBlocking
 
 class AppContainer(context: Context) {
 
 
-    private val database: AppDatabase = AppDatabase.getInstance(context)
+    private val database: AppDatabase = AppDatabase.Companion.getInstance(context)
 
 
     private val humorDao = database.humorDao()

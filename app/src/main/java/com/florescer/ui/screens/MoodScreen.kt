@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.florescer.R
-import com.florescer.data.HumorEntry
-import com.florescer.data.HumorRepository
+import com.florescer.data.local.entity.HumorEntity
+import com.florescer.data.repository.HumorRepository
 import com.florescer.ui.theme.*
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -281,7 +281,7 @@ fun MoodScreen(
                                 isLoading = true
                                 errorMessage = null
 
-                                val humor = HumorEntry(
+                                val humor = HumorEntity(
                                     mood = moodsText[moodIndex],
                                     symptoms = "" /* mantido como antes; você montava acima */,
                                     heartRate = heartRate.text,

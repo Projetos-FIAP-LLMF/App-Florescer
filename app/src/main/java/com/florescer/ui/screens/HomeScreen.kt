@@ -17,9 +17,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.florescer.R
-import com.florescer.ui.auth.AuthViewModel
+import com.florescer.ui.viewmodel.AuthViewModel
 import androidx.navigation.NavHostController
-import com.florescer.ui.auth.AuthUiState
+import com.florescer.ui.viewmodel.AuthUiState
 
 @Composable
 fun HomeScreen(

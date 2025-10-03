@@ -1,8 +1,9 @@
-package com.florescer.ui.auth
+package com.florescer.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.florescer.data.AuthRepository
+import com.florescer.data.repository.AuthRepository
+import com.florescer.ui.viewmodel.AuthViewModel
 
 class AuthViewModelFactory(
     private val authRepository: AuthRepository
