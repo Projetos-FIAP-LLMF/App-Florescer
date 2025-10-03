@@ -10,10 +10,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.florescer.ui.screens.*
-import com.florescer.data.AuthRepository
-import com.florescer.data.HumorRepository
-import com.florescer.ui.auth.AuthViewModel
-import com.florescer.ui.auth.AuthViewModelFactory
+import com.florescer.data.repository.AuthRepository
+import com.florescer.data.repository.HumorRepository
+import com.florescer.ui.viewmodel.AuthViewModel
+import com.florescer.di.AuthViewModelFactory
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

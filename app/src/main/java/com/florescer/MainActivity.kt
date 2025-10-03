@@ -5,8 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
-import com.florescer.data.AuthRepository
-import com.florescer.data.HumorRepository
+import com.florescer.data.repository.AuthRepository
+import com.florescer.data.repository.HumorRepository
 import com.florescer.ui.navigation.NavGraph
 import com.florescer.ui.theme.FlorescerTheme
 

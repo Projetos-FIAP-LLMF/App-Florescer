@@ -21,7 +21,7 @@ class HumorRepository(
     suspend fun getHumoresLocais(): List<HumorEntry> = dao.getAll()
 
 
-    suspend fun sendHumorToBackend(humor: HumorEntry): Boolean {
+    suspend fun sendHumorToBackend(humor: HumorEntity): Boolean {
         return try {
             val userId = authRepository.getUserId()
 

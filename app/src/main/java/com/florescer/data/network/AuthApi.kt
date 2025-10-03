@@ -1,6 +1,6 @@
 package com.florescer.data.network
 
-import com.florescer.data.TokenEntity
+import com.florescer.data.local.entity.TokenEntity
 import retrofit2.Response
 import retrofit2.http.POST
 

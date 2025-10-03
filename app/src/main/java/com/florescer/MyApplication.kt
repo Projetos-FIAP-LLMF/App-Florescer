@@ -1,6 +1,7 @@
 package com.florescer
 
 import android.app.Application
+import com.florescer.di.AppContainer
 
 class MyApplication : Application() {
 
