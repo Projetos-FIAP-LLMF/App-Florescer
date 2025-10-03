@@ -22,7 +22,7 @@ import coil.compose.AsyncImage
 import coil.decode.GifDecoder
 import coil.request.ImageRequest
 import com.florescer.R
-import com.florescer.data.repository.HumorRepository
+import com.florescer.data.HumorRepository
 import com.florescer.data.model.Recomendacao
 import com.florescer.ui.theme.*
 

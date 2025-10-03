@@ -9,9 +9,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.florescer.data.HumorRepository
 import com.florescer.ui.screens.*
 import com.florescer.data.repository.AuthRepository
-import com.florescer.data.repository.HumorRepository
 import com.florescer.ui.viewmodel.AuthViewModel
 import com.florescer.di.AuthViewModelFactory
 

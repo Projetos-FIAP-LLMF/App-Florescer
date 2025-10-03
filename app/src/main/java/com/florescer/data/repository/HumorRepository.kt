@@ -1,7 +1,10 @@
 package com.florescer.data
 
+import com.florescer.data.local.dao.HumorDao
+import com.florescer.data.local.entity.HumorEntity
 import com.florescer.data.model.*
 import com.florescer.data.network.*
+import com.florescer.data.repository.AuthRepository
 
 class HumorRepository(
     private val humorApi: HumorApi,
@@ -17,8 +20,8 @@ class HumorRepository(
     private val authRepository: AuthRepository
 ) {
 
-    suspend fun saveHumorLocal(humor: HumorEntry) = dao.insert(humor)
-    suspend fun getHumoresLocais(): List<HumorEntry> = dao.getAll()
+    suspend fun saveHumorLocal(humor: HumorEntity) = dao.insert(humor)
+    suspend fun getHumoresLocais(): List<HumorEntity> = dao.getAll()
 
 
     suspend fun sendHumorToBackend(humor: HumorEntity): Boolean {

@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.florescer.R
-import com.florescer.data.repository.HumorRepository
+import com.florescer.data.HumorRepository
 import com.florescer.ui.theme.*
 
 @Composable

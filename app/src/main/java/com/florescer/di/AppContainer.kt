@@ -1,10 +1,10 @@
 package com.florescer.di
 
 import android.content.Context
+import com.florescer.data.HumorRepository
 import com.florescer.data.local.AppDatabase
 import com.florescer.data.network.RetrofitInstance
 import com.florescer.data.repository.AuthRepository
-import com.florescer.data.repository.HumorRepository
 import kotlinx.coroutines.runBlocking
 
 class AppContainer(context: Context) {
